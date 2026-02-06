@@ -2,6 +2,66 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'study-medical',
+    title: 'Study Medical — Architecture-Driven Backend (In Progress)',
+    description: 'Healthcare-domain backend system designed with layered architecture, hybrid data strategy, and long-term scalability in mind.',
+    featured: true,
+    techStack: [
+      'Spring Boot 3',
+      'Java 17/21',
+      'Spring Security (OAuth2)',
+      'PostgreSQL (Supabase)',
+      'MongoDB Atlas',
+      'pgvector',
+      'WebSocket (STOMP)',
+      'Docker',
+      'Flutter (Client)',
+      'Supabase Auth'
+    ],
+    category: 'backend',
+    links: {
+      github: 'https://github.com/Hu-Tao128',
+    },
+    technicalDetails: {
+      architecture: [
+        'Layered backend structure (Controller → Service → Repository)',
+        'JWT validation via Spring Security OAuth2 Resource Server',
+        'Hybrid persistence strategy (Relational + NoSQL)',
+        'DTO mapping via MapStruct',
+        'Rate limiting with Bucket4j',
+        'WebSocket-based real-time communication'
+      ],
+      keyFeatures: [
+        'Supabase Auth integration for secure authentication',
+        'PostgreSQL for structured domain entities',
+        'MongoDB Atlas for high-volume flexible data (chats, logs, flashcards)',
+        'Vector embeddings via pgvector for semantic search',
+        'RESTful API baseline with version-ready structure'
+      ],
+      challenges: [
+        'Designing hybrid persistence without tight coupling',
+        'Maintaining domain clarity across relational and document storage',
+        'Planning scalable service boundaries before feature expansion',
+        'Integrating secure JWT validation without custom auth server'
+      ],
+      solutions: [
+        'Explicit separation of domain responsibilities per data store',
+        'Security delegation to Supabase with token validation server-side',
+        'Layer isolation between transport, business logic and persistence',
+        'Future-proofed architecture with Dockerized environment design'
+      ],
+      demonstrates: [
+        'Hybrid backend architecture planning',
+        'Security-aware backend design',
+        'Scalability-conscious system modeling',
+        'Healthcare-domain structured thinking',
+        'Infrastructure-level awareness beyond CRUD APIs'
+      ],
+    },
+    period: '2026 - In Progress',
+    status: 'in-progress',
+  },
+  {
     id: 'medusa-ecommerce',
     title: 'Backend E-commerce (MedusaJS)',
     description: 'Configuración completa de plataforma e-commerce headless con MedusaJS, implementando arquitectura modular y escalable.',

@@ -1,115 +1,80 @@
-import { useState, useEffect } from 'react';
-import { FaGithub, FaBars, FaTimes, FaClock, FaStar, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
-import { personalInfo, projects } from './data';
+import { useState } from 'react';
+import { FaBars, FaEnvelope, FaGithub, FaTimes } from 'react-icons/fa';
+import { education, personalInfo, projects } from './data';
 
 function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
     { name: 'Inicio', href: '#hero' },
-    { name: 'Arquitectura', href: '#architecture' },
-    { name: 'Prácticas', href: '#practices' },
+    { name: 'Technical Stack', href: '#technologies' },
+    { name: 'Architecture', href: '#architecture-approach' },
     { name: 'Proyectos', href: '#projects' },
+    { name: 'Practices', href: '#practices' },
+    { name: 'Educacion', href: '#education' },
     { name: 'Contacto', href: '#contact' },
   ];
 
   return (
-    <header style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 50,
-      transition: 'all 0.3s',
-      padding: isScrolled ? '1rem 0' : '1.5rem 0',
-      backgroundColor: isScrolled ? '#0F172A' : 'transparent',
-      borderBottom: isScrolled ? '1px solid #1E293B' : 'none',
-    }}>
-      <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
-        <a href="#hero" style={{
-          fontSize: '1.25rem',
-          fontWeight: 700,
-          color: '#38BDF8',
-          textDecoration: 'none',
-          letterSpacing: '0.025em'
-        }}>
+    <header className="nav-shell fixed inset-x-0 top-0 z-50">
+      <nav aria-label="Primary" className="container-shell flex h-16 items-center justify-between">
+        <a href="#hero" className="text-lg font-semibold tracking-wide text-[#2563eb]" aria-label="Go to home section">
           AJH
         </a>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden md:flex">
+        <div className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} style={{
-              color: '#64748B',
-              textDecoration: 'none',
-              fontWeight: 500,
-              fontSize: '0.875rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em'
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#38BDF8'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
-              {link.name}
-            </a>
-          ))}
-          <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer" style={{
-            color: '#64748B',
-            transition: 'color 0.3s'
-          }} onMouseEnter={(e) => e.currentTarget.style.color = '#38BDF8'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
-            <FaGithub size={20} />
+              <a
+                key={link.name}
+                href={link.href}
+                className="nav-link text-sm font-medium"
+              >
+                {link.name}
+              </a>
+            ))}
+          <a
+            href={personalInfo.contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link"
+            aria-label="GitHub"
+          >
+            <FaGithub size={18} />
           </a>
         </div>
 
-        <button style={{
-          display: 'none',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          color: '#E2E8F0'
-        }} className="md:flex" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
-          {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        <button
+          type="button"
+          className="md:hidden text-slate-200"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
+        >
+          {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
         </button>
       </nav>
 
       {mobileMenuOpen && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          right: 0,
-          backgroundColor: '#0F172A',
-          borderTop: '1px solid #1E293B',
-          padding: '1.5rem'
-        }} className="md:hidden">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div id="mobile-menu" className="border-t border-slate-700 bg-slate-900 md:hidden">
+          <div className="container-shell flex flex-col gap-4 py-5">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} style={{
-                color: '#94A3B8',
-                textDecoration: 'none',
-                fontWeight: 500,
-                fontSize: '1.125rem',
-                padding: '0.5rem 0'
-              }} onClick={() => setMobileMenuOpen(false)}>
+              <a
+                key={link.name}
+                href={link.href}
+                className="nav-link text-base font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 {link.name}
               </a>
             ))}
-            <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer" style={{
-              color: '#94A3B8',
-              textDecoration: 'none',
-              fontWeight: 500,
-              fontSize: '1.125rem',
-              padding: '0.5rem 0',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }} onClick={() => setMobileMenuOpen(false)}>
-              <FaGithub size={18} />
+            <a
+              href={personalInfo.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-link inline-flex items-center gap-2 text-base font-medium"
+            >
+              <FaGithub size={16} />
               GitHub
             </a>
           </div>
@@ -119,138 +84,60 @@ function Header() {
   );
 }
 
-function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  return (
-    <footer style={{
-      backgroundColor: '#0F172A',
-      borderTop: '1px solid #1E293B',
-      marginTop: '5rem'
-    }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '2rem' }} className="md:grid-cols-3">
-          <div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#38BDF8', marginBottom: '0.5rem', letterSpacing: '0.025em' }}>
-              AJH
-            </h3>
-            <p style={{ color: '#64748B', lineHeight: 1.5, marginBottom: '0.5rem' }}>
-              {personalInfo.tagline}
-            </p>
-          </div>
-
-          <div>
-            <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem', letterSpacing: '0.025em' }}>
-              NAVEGACIÓN
-            </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              <li><a href="#hero" style={{ color: '#64748B', textDecoration: 'none', fontSize: '0.8125rem' }}>Inicio</a></li>
-              <li><a href="#architecture" style={{ color: '#64748B', textDecoration: 'none', fontSize: '0.8125rem' }}>Arquitectura</a></li>
-              <li><a href="#practices" style={{ color: '#64748B', textDecoration: 'none', fontSize: '0.8125rem' }}>Prácticas</a></li>
-              <li><a href="#projects" style={{ color: '#64748B', textDecoration: 'none', fontSize: '0.8125rem' }}>Proyectos</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem', letterSpacing: '0.025em' }}>
-              CONTACTO
-            </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748B', textDecoration: 'none', fontSize: '0.8125rem' }}>
-                <FaGithub size={16} />
-                <span>GitHub</span>
-              </a>
-              <a href={personalInfo.contact.email} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748B', textDecoration: 'none', fontSize: '0.8125rem' }}>
-                <FaEnvelope size={16} />
-                <span>Email</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div style={{ borderTop: '1px solid #334155', marginTop: '2rem', paddingTop: '2rem', textAlign: 'center', color: '#475569', fontSize: '0.8125rem' }}>
-          <p>© {currentYear} Alcantara Huerta Angel Josue. Backend & Mobile Developer.</p>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 function Hero() {
+  const handleViewProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleOpenGitHub = () => {
+    window.open(personalInfo.contact.github, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleDownloadCv = () => {
+    const link = document.createElement('a');
+    link.href = '/Alcantara-Huerta-Angel-Josue-CV.txt';
+    link.download = 'Alcantara-Huerta-Angel-Josue-CV.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <section id="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '5rem', position: 'relative', overflow: 'hidden', backgroundColor: '#0F172A' }}>
-      <div style={{ maxWidth: '768px', margin: '0 auto', padding: '0 1rem', position: 'relative', zIndex: 10 }}>
-        <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#38BDF8', fontSize: '1rem', marginBottom: '0.75rem', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-            {personalInfo.title}
-          </p>
-
-          <h1 style={{ fontSize: '3rem', fontWeight: 700, marginBottom: '1rem', color: '#E2E8F0', lineHeight: 1.1 }} className="md:text-7xl">
-            {personalInfo.name}
+    <section id="hero" className="section section-dark pt-28 sm:pt-32" aria-labelledby="hero-title">
+      <div className="container-shell">
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 id="hero-title" className="mb-4 text-4xl font-semibold tracking-tight leading-tight text-slate-100 sm:text-5xl">
+            Backend &amp; Mobile Developer
           </h1>
-
-          <p style={{ fontSize: '1.125rem', color: '#94A3B8', marginBottom: '1.5rem', maxWidth: '384px', margin: '0 auto', lineHeight: 1.5 }} className="md:text-2xl">
-            {personalInfo.tagline}
+          <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
+            REST architecture, IoT integration and headless commerce solutions focused on scalability and maintainability.
           </p>
 
-          <p style={{ fontSize: '1rem', color: '#64748B', marginBottom: '2.5rem', maxWidth: '512px', margin: '0 auto', lineHeight: 1.6 }}>
-            {personalInfo.description}
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center', alignItems: 'center', marginBottom: '2rem' }} className="sm:flex-row">
-            <a href="#projects" style={{
-              padding: '1rem 2rem',
-              fontSize: '1rem',
-              fontWeight: 600,
-              borderRadius: '0.5rem',
-              border: 'none',
-              cursor: 'pointer',
-              background: '#38BDF8',
-              color: 'white',
-              textDecoration: 'none',
-              letterSpacing: '0.025em'
-            }} className="md:text-lg md:px-8 md:py-3">
-              Ver Proyectos
-            </a>
-            <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer" style={{
-              padding: '1rem 2rem',
-              fontSize: '1rem',
-              fontWeight: 600,
-              borderRadius: '0.5rem',
-              border: '2px solid #38BDF8',
-              color: '#38BDF8',
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              letterSpacing: '0.025em'
-            }} className="md:text-lg md:px-8 md:py-3">
-              <FaGithub />
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={handleViewProjects}
+              className="cta-primary"
+              aria-label="View project section"
+            >
+              View Projects
+            </button>
+            <button
+              type="button"
+              onClick={handleOpenGitHub}
+              className="cta-secondary"
+              aria-label="Open GitHub profile in new tab"
+            >
               GitHub
-            </a>
-          </div>
-
-          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
-            {['React Native', 'Node.js', 'TypeScript', 'MongoDB', 'MedusaJS', 'IoT', 'REST APIs'].map((skill) => (
-              <span key={skill} style={{
-                padding: '0.5rem 1rem',
-                backgroundColor: '#1E293B',
-                color: '#E2E8F0',
-                borderRadius: '0.25rem',
-                border: '1px solid #334155',
-                fontSize: '0.8125rem',
-                fontWeight: 500,
-                letterSpacing: '0.025em'
-              }}>
-                {skill}
-              </span>
-            ))}
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', marginBottom: '1.5rem' }}>
-            <span style={{ fontSize: '0.875rem', color: '#94A3B8', fontWeight: 500, letterSpacing: '0.025em' }}>
-              Arquitectura REST · IoT · Headless Commerce
-            </span>
+            </button>
+            <button
+              type="button"
+              onClick={handleDownloadCv}
+              className="cta-secondary"
+              aria-label="Download curriculum vitae"
+            >
+              Download CV
+            </button>
           </div>
         </div>
       </div>
@@ -260,114 +147,87 @@ function Hero() {
 
 function Architecture() {
   return (
-    <section id="architecture" style={{ padding: '5rem 0', backgroundColor: '#0F172A' }}>
-      <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '0 1rem' }}>
-        <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', color: '#38BDF8', letterSpacing: '0.025em' }}>
-          Arquitectura Backend & Mobile
-        </h2>
-        <p style={{ color: '#64748B', fontSize: '1rem', marginBottom: '3rem', lineHeight: 1.5 }}>
-          Enfoque en separación de capas, APIs estructuradas y principios SOLID.
-        </p>
+    <section id="architecture-approach" className="section section-dark" aria-labelledby="architecture-title">
+      <div className="container-shell">
+        <div className="section-heading">
+          <h2 id="architecture-title" className="section-title">Architecture Approach</h2>
+          <p className="mt-2 text-sm font-medium text-slate-400">Enfoque de Arquitectura</p>
+          <p className="section-description">
+            I apply layered backend architecture patterns across ecosystems, focused on separation of concerns, modular services and transport-independent domain logic.
+          </p>
+        </div>
 
-        <div style={{ display: 'grid', gap: '1.5rem' }}>
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '2rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '1rem', letterSpacing: '0.025em' }}>
-              SEPARACIÓN CLIENTE / SERVIDOR
-            </h3>
-            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8125rem', color: '#94A3B8', lineHeight: 1.6 }}>
-              <div style={{ margin: 0, whiteSpace: 'pre', backgroundColor: '#0F172A', padding: '1rem', borderRadius: '0.25rem', border: '1px solid #334155' }}>
-Mobile App (React Native)
-     ↓
-Node.js / Express API
-     ↓
-MongoDB / Firebase / MedusaJS
+        <div className="grid gap-12 md:grid-cols-2">
+          <article className="panel">
+            <h3 className="panel-title">Core principles</h3>
+            <ul className="panel-list">
+              <li>RESTful resource-oriented API design.</li>
+              <li>Layer separation across Controllers, Services and Data Access boundaries.</li>
+              <li>DTO-based request and response contracts for stable integrations.</li>
+              <li>Middleware-driven validation before domain execution.</li>
+              <li>Centralized error-handling strategy with standardized failure envelopes.</li>
+              <li>Modular domain boundaries for maintainable service decomposition.</li>
+              <li>Framework-agnostic service logic to keep domain behavior portable.</li>
+            </ul>
+            <p className="mt-4 text-sm leading-relaxed text-slate-400">
+              Architectural portability is demonstrated by implementing equivalent backend domains in both Node.js (TypeScript) and Spring Boot (Java), validating stable design decisions across technology stacks.
+            </p>
+          </article>
+
+          <article className="panel">
+            <h3 className="panel-title">FitBalance Backend - Polyglot Validation</h3>
+            <div className="mt-4 grid gap-6 md:grid-cols-2">
+              <div>
+                <h4 className="panel-subtitle">Implementation A</h4>
+                <ul className="panel-list">
+                  <li>Node.js + Express + TypeScript</li>
+                  <li>MongoDB Atlas</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="panel-subtitle">Implementation B</h4>
+                <ul className="panel-list">
+                  <li>Java + Spring Boot</li>
+                  <li>JPA with relational persistence</li>
+                </ul>
               </div>
             </div>
-          </div>
-
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '2rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '1rem', letterSpacing: '0.025em' }}>
-              APIs REST ESTRUCTURADAS
-            </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>JWT Authentication</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>Middleware de validación</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>Error handling estructurado</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>Logging centralizado</span>
-              </li>
+            <h4 className="panel-subtitle mt-5">Shared architecture</h4>
+            <ul className="panel-list">
+              <li>Controller layer for request handling.</li>
+              <li>Service layer for domain logic.</li>
+              <li>Repository/Data Access abstraction.</li>
+              <li>DTO-based input and output contracts.</li>
+              <li>Validation through middleware or annotations.</li>
+              <li>Centralized exception handling.</li>
             </ul>
-          </div>
+            <p className="mt-4 text-sm leading-relaxed text-slate-400">
+              This dual implementation validates backend architecture proficiency beyond framework conventions, emphasizing structural design principles, clean layer boundaries and service portability across stacks.
+            </p>
+          </article>
 
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '2rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '1rem', letterSpacing: '0.025em' }}>
-              MODULARIZACIÓN
-            </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>Separación por capas (routes/services/models)</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>Dependency injection</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>Plugin architecture (MedusaJS)</span>
-              </li>
-            </ul>
-          </div>
+          <article className="panel">
+            <h3 className="panel-title">Layer diagram</h3>
+            <pre className="mono-block mt-4">
+{`Client / Frontend
+       |
+     Routes
+       |
+  Controllers
+       |
+    Services
+       |
+   Data Access
+       |
+ Database / Medusa`}
+            </pre>
+            <pre className="mono-block mt-4">
+{`Request -> Validation Middleware -> Controller
+            -> Service -> Model -> Response
 
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '2rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '1rem', letterSpacing: '0.025em' }}>
-              TESTING & CI/CD
-            </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>Jest unit tests</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>React Native Testing Library</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem' }}>
-                <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                <span>GitHub Actions CI/CD</span>
-              </li>
-            </ul>
-          </div>
+Error Path -> AppError -> Error Middleware -> Standard JSON`}
+            </pre>
+          </article>
         </div>
       </div>
     </section>
@@ -375,113 +235,241 @@ MongoDB / Firebase / MedusaJS
 }
 
 function Practices() {
+  const practices = [
+    {
+      title: 'Clean Code',
+      description: 'Small focused modules, meaningful naming and explicit boundaries between transport, domain and persistence logic.',
+    },
+    {
+      title: 'SOLID principles (applied level)',
+      description: 'Applied in service layer design with interface-driven contracts, low coupling and testable domain abstractions.',
+    },
+    {
+      title: 'REST API design',
+      description: 'Resource-oriented endpoints, predictable status codes, version-safe contracts and consistent response envelopes.',
+    },
+    {
+      title: 'Git workflow',
+      description: 'Feature branching, pull-request reviews, conventional commits and controlled merges to maintain release stability.',
+    },
+    {
+      title: 'Unit testing (Jest)',
+      description: 'Unit coverage for services, validation rules and critical business flows with deterministic test fixtures.',
+    },
+    {
+      title: 'CI/CD (GitHub Actions)',
+      description: 'Automated lint, build and test pipelines on pull requests for fast feedback and reliable integration.',
+    },
+  ];
+
   return (
-    <section id="practices" style={{ padding: '5rem 0', backgroundColor: '#0F172A' }}>
-      <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '0 1rem' }}>
-        <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', color: '#38BDF8', letterSpacing: '0.025em' }}>
-          Prácticas de Ingeniería
-        </h2>
-        <p style={{ color: '#64748B', fontSize: '1rem', marginBottom: '3rem', lineHeight: 1.5 }}>
-          Principios SOLID, Clean Code y procesos profesionales de desarrollo.
-        </p>
+    <section id="practices" className="section section-dark" aria-labelledby="practices-title">
+      <div className="container-shell">
+        <div className="section-heading">
+          <h2 id="practices-title" className="section-title">Engineering Practices</h2>
+          <p className="section-description">
+            Development standards applied across backend and mobile delivery.
+          </p>
+        </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '1.5rem' }} className="md:grid-cols-2">
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '1.5rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem', letterSpacing: '0.025em' }}>
-              DISEÑO DE APIS REST
-            </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Endpoints RESTful:</strong> GET, POST, PUT, DELETE
+        <article className="panel">
+          <ul className="divide-y divide-slate-700">
+            {practices.map((practice) => (
+              <li key={practice.title} className="py-4 first:pt-0 last:pb-0">
+                <p className="text-sm font-semibold text-slate-200">{practice.title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-slate-400">{practice.description}</p>
               </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Status codes:</strong> 200, 201, 400, 401, 500
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>JSON responses:</strong> Consistent data structures
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Validation:</strong> Request body + Query params
-              </li>
-            </ul>
-          </div>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </section>
+  );
+}
 
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '1.5rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem', letterSpacing: '0.025em' }}>
-              CLEAN CODE
-            </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Functions:</strong> Single responsibility
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Variables:</strong> Descriptive names, no magic numbers
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Comments:</strong> JSDoc for functions & classes
-              </li>
-            </ul>
-          </div>
+function Technologies() {
+  const layers = [
+    {
+      title: 'Backend',
+      technologies: [
+        {
+          name: 'Spring Boot 3',
+          description: 'Java backend framework for layered API services with production-grade configuration patterns.',
+        },
+        {
+          name: 'Java 17/21',
+          description: 'LTS runtime foundation for strongly typed domain services and maintainable enterprise codebases.',
+        },
+        {
+          name: 'Node.js',
+          description: 'Runtime orientado a I/O no bloqueante para servicios REST de alto throughput.',
+        },
+        {
+          name: 'Express',
+          description: 'Framework para routing modular, middlewares de validacion y manejo centralizado de errores.',
+        },
+        {
+          name: 'TypeScript',
+          description: 'Tipado estatico para contratos de API, modelos de dominio y mantenibilidad del backend.',
+        },
+        {
+          name: 'MapStruct',
+          description: 'Compile-time DTO mapping for consistent request/response transformations in layered services.',
+        },
+      ],
+    },
+    {
+      title: 'Databases',
+      technologies: [
+        {
+          name: 'MongoDB',
+          description: 'Modelo documental para datos flexibles y consultas optimizadas en aplicaciones Node.js.',
+        },
+        {
+          name: 'PostgreSQL',
+          description: 'Base relacional para consistencia transaccional, relaciones complejas y consultas SQL avanzadas.',
+        },
+        {
+          name: 'pgvector',
+          description: 'Vector extension for semantic search and embedding-based retrieval in PostgreSQL.',
+        },
+        {
+          name: 'Firebase',
+          description: 'Servicios en tiempo real para sincronizacion de eventos y soporte offline en apps moviles.',
+        },
+      ],
+    },
+    {
+      title: 'Mobile',
+      technologies: [
+        {
+          name: 'React Native',
+          description: 'Desarrollo cross-platform con arquitectura de componentes reutilizables para iOS y Android.',
+        },
+        {
+          name: 'Expo',
+          description: 'Tooling para builds, actualizaciones OTA y acceso consistente a APIs nativas.',
+        },
+        {
+          name: 'Bluetooth / IoT Integration',
+          description: 'Conexion de dispositivos fisicos para telemetria y sincronizacion de datos en tiempo real.',
+        },
+      ],
+    },
+    {
+      title: 'Testing & DevOps',
+      technologies: [
+        {
+          name: 'Bucket4j',
+          description: 'Rate limiting controls to protect API throughput and enforce fair client usage.',
+        },
+        {
+          name: 'Jest',
+          description: 'Pruebas unitarias de logica de negocio, servicios y validaciones de API.',
+        },
+        {
+          name: 'React Native Testing Library',
+          description: 'Pruebas de interfaz por comportamiento para flujos criticos en aplicaciones moviles.',
+        },
+        {
+          name: 'GitHub Actions',
+          description: 'Pipelines CI para lint, testing y build automatizado en cada pull request.',
+        },
+      ],
+    },
+    {
+      title: 'Infrastructure',
+      technologies: [
+        {
+          name: 'Spring Security OAuth2',
+          description: 'Resource server token validation for secure JWT-protected backend endpoints.',
+        },
+        {
+          name: 'Supabase Auth',
+          description: 'Delegated identity provider integrated with backend-side token verification workflows.',
+        },
+        {
+          name: 'Docker (Basic)',
+          description: 'Containerizacion basica de apps Node.js con configuracion de variables de entorno por ambiente.',
+        },
+        {
+          name: 'REST Service Deployment',
+          description: 'Despliegue de APIs con configuracion de entornos y separacion entre desarrollo y produccion.',
+        },
+        {
+          name: 'Environment Configuration',
+          description: 'Gestion de secretos y parametros runtime para mantener consistencia entre entornos.',
+        },
+      ],
+    },
+  ];
 
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '1.5rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem', letterSpacing: '0.025em' }}>
-              PRINCIPIOS SOLID
-            </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>S:</strong> Single Responsibility Principle
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>O:</strong> Open/Closed Principle
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>L:</strong> Liskov Substitution Principle
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>I:</strong> Interface Segregation Principle
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>D:</strong> Dependency Inversion Principle
-              </li>
-            </ul>
-          </div>
+  return (
+    <section id="technologies" className="section section-soft" aria-labelledby="technologies-title">
+      <div className="container-shell">
+        <div className="section-heading">
+          <h2 id="technologies-title" className="section-title">Technical Stack</h2>
+          <p className="section-description">
+            Technology capabilities organized by architecture layer with backend-first priorities.
+          </p>
+        </div>
 
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '1.5rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem', letterSpacing: '0.025em' }}>
-              GIT FLOW
-            </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Branches:</strong> main, develop, feature/*
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>Commits:</strong> Conventional commits (feat:, fix:, docs:)
-              </li>
-              <li style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                <strong>PRs:</strong> Code reviews required before merge
-              </li>
-            </ul>
-          </div>
+        <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-3">
+          {layers.map((layer) => (
+            <article key={layer.title} className="panel">
+              <h3 className="panel-title">{layer.title}</h3>
+              <ul className="panel-list">
+                {layer.technologies.map((technology) => (
+                  <li key={technology.name}>
+                    <p className="text-sm font-semibold text-slate-100">{technology.name}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-400">{technology.description}</p>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Education() {
+  return (
+    <section id="education" className="section section-soft" aria-labelledby="education-title">
+      <div className="container-shell">
+        <div className="section-heading">
+          <h2 id="education-title" className="section-title">Education</h2>
+          <p className="section-description">
+            Academic background and applied software engineering training.
+          </p>
+        </div>
+
+        <div className="grid gap-12">
+          {education.map((item) => (
+            <article key={item.id} className="panel">
+              <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h3 className="panel-title">{item.degree}</h3>
+                  <p className="mt-1 text-sm text-slate-400">{item.institution}</p>
+                </div>
+                <span className="rounded-md border border-slate-700 bg-slate-900 px-3 py-1 text-xs font-medium text-slate-400">
+                  {item.period}
+                </span>
+              </div>
+
+              <p className="text-sm leading-relaxed text-slate-400">{item.description}</p>
+
+              <div className="mt-4">
+                <h4 className="panel-subtitle">Key outcomes</h4>
+                <ul className="panel-list">
+                  {item.achievements.slice(0, 3).map((achievement) => (
+                    <li key={achievement}>{achievement}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -489,119 +477,220 @@ function Practices() {
 }
 
 function Projects() {
+  const projectDesignNotes: Record<
+    string,
+    {
+      problem: string;
+      diagram: string;
+      decisions: string[];
+      challengesSolved: string[];
+    }
+  > = {
+    'study-medical': {
+      problem:
+        'Study Medical is an evolving healthcare-domain backend system built for architectural stability before feature density, with explicit domain boundaries and a hybrid persistence strategy for long-term scalability.',
+      diagram: `Flutter Client
+      |
+Spring Boot 3 API (Java 17/21)
+      |
+Controllers -> Services -> Repositories
+      |                  |
+PostgreSQL (Supabase)  MongoDB Atlas
+      |
+pgvector + STOMP WebSocket`,
+      decisions: [
+        'Implemented Controller -> Service -> Repository boundaries to keep transport concerns isolated from domain logic.',
+        'Standardized DTO mapping and contract control for predictable API evolution.',
+        'Used Spring Security OAuth2 Resource Server for JWT validation, delegating identity to Supabase Auth.',
+        'Applied hybrid persistence boundaries: relational entities in PostgreSQL and high-volume flexible data in MongoDB.',
+        'Added infrastructure-oriented guards with Bucket4j rate limiting, Docker runtime consistency and STOMP WebSocket channels.',
+      ],
+      challengesSolved: [
+        'Avoided tight coupling while introducing hybrid persistence across relational and document stores.',
+        'Maintained domain clarity between users, sessions and medical records before scaling feature scope.',
+        'Integrated secure JWT validation without operating a custom auth server.',
+        'Prepared scalability boundaries early through environment separation and observability-ready architecture.',
+      ],
+    },
+    'medusa-ecommerce': {
+      problem:
+        'Build a headless commerce backend that can scale product catalog operations, order workflows and third-party integrations without coupling business logic to a single storefront.',
+      diagram: `Next.js Storefront / Admin UI
+            |
+        API Gateway
+            |
+ Medusa Modules + Custom Services
+      |           |           |
+ PostgreSQL    Redis      Worker Queue`,
+      decisions: [
+        'Adopted Medusa plugin architecture to extend payments and shipping without modifying core modules.',
+        'Introduced Redis caching for read-heavy catalog endpoints to reduce database pressure.',
+        'Separated domain services from transport layer so REST controllers remain thin and testable.',
+      ],
+      challengesSolved: [
+        'Handled high catalog read volume with caching and index-aware query patterns.',
+        'Stabilized order workflows using event-driven processing for asynchronous operations.',
+        'Reduced integration risk by isolating external providers behind service adapters.',
+      ],
+    },
+    fitbalance: {
+      problem:
+        'Deliver a mobile fitness platform with reliable backend services and IoT-connected devices while maintaining responsive UX under unstable network conditions.',
+      diagram: `React Native App
+      |      \
+Bluetooth   REST API (Node/Express)
+      |              |
+ Smart Scale      MongoDB Atlas
+                    |
+             Auth + Metrics Services`,
+      decisions: [
+        'Designed API modules by bounded context (auth, profiles, metrics, devices) to keep the backend maintainable.',
+        'Implemented synchronization contracts between device events and API writes to avoid inconsistent states.',
+        'Used typed request/response models to preserve API compatibility across mobile releases.',
+      ],
+      challengesSolved: [
+        'Solved intermittent connectivity with resilient sync patterns between app, device and backend.',
+        'Improved query performance for historical metrics through targeted indexing and pagination.',
+        'Kept mobile experience stable by decoupling hardware event processing from UI rendering.',
+      ],
+    },
+    safecar: {
+      problem:
+        'Create a real-time vehicle tracking system that integrates ESP32 telemetry, cloud persistence and mobile visualization with dependable event propagation.',
+      diagram: `ESP32 Device -> Firebase Realtime DB
+        |                |
+   Telemetry Stream   Cloud Triggers
+        |                |
+   React Native App <- Alert Service
+            |
+       VIN + Policy Module`,
+      decisions: [
+        'Structured telemetry ingestion as event streams instead of direct state mutation flows.',
+        'Defined explicit data contracts for VIN lookup, policy records and alert payloads.',
+        'Separated real-time updates from administrative operations to reduce coupling.',
+      ],
+      challengesSolved: [
+        'Resolved device-cloud synchronization issues with predictable retry and reconnection behavior.',
+        'Reduced noisy updates by shaping telemetry payloads before client consumption.',
+        'Maintained data consistency across tracking, policy and notification domains.',
+      ],
+    },
+    'yg-amigurumis': {
+      problem:
+        'Implement a transactional e-commerce system with reliable inventory and order consistency using a traditional PHP/MySQL stack with modular backend behavior.',
+      diagram: `Storefront (Web)
+      |
+PHP Controllers -> Service Layer
+      |               |
+ Session/Auth      Order Domain
+      |               |
+   MySQL <-> Payment Integration`,
+      decisions: [
+        'Modeled catalog, cart and order entities with normalized relational design for transactional integrity.',
+        'Applied MVC boundaries to isolate request handling, domain logic and persistence concerns.',
+        'Wrapped payment operations with transactional safeguards to prevent partial order states.',
+      ],
+      challengesSolved: [
+        'Addressed inventory race conditions by enforcing transactional updates on checkout.',
+        'Improved operational reliability with clear order state transitions and auditable flows.',
+        'Optimized MySQL performance through selective indexing on frequently filtered columns.',
+      ],
+    },
+  };
+
   return (
-    <section id="projects" style={{ padding: '5rem 0', backgroundColor: '#0F172A' }}>
-      <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '0 1rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', color: '#38BDF8', letterSpacing: '0.025em' }}>
-            Proyectos con Arquitectura
-          </h2>
-          <p style={{ color: '#64748B', fontSize: '1rem', maxWidth: '384px', margin: '0 auto' }}>
-            Diseño técnico, estructura modular y criterio de ingeniería
+    <section id="projects" className="section section-soft" aria-labelledby="projects-title">
+      <div className="container-shell">
+        <div className="section-heading">
+          <h2 id="projects-title" className="section-title">Proyectos</h2>
+          <p className="section-description">
+            Implementaciones completas con enfoque en arquitectura, datos y operacion.
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {projects.map((project) => (
-            <div key={project.id} style={{
-              backgroundColor: '#1E293B',
-              borderRadius: '0.5rem',
-              padding: '2rem',
-              border: project.featured ? '2px solid #38BDF8' : '1px solid #334155'
-            }}>
-              {project.featured && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', padding: '0.75rem', backgroundColor: '#38BDF8' }}>
-                  <FaStar style={{ color: '#FBBF24', fontSize: '1.125rem' }} />
-                  <span style={{ color: 'white', fontWeight: 600, fontSize: '0.875rem', letterSpacing: '0.025em' }}>
-                    PROYECTO PRINCIPAL
-                  </span>
-                </div>
-              )}
+            <article key={project.id} className={`panel h-full ${project.featured ? 'border-[#334155]' : ''}`}>
+              {(() => {
+                const notes = projectDesignNotes[project.id] ?? {
+                  problem: project.description,
+                  diagram: `Client -> API -> Service -> Data Layer`,
+                  decisions: project.technicalDetails.solutions,
+                  challengesSolved: project.technicalDetails.challenges,
+                };
 
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: '#38BDF8', letterSpacing: '0.025em' }}>
-                {project.title}
-              </h3>
-              <p style={{ color: '#94A3B8', fontSize: '0.9375rem', marginBottom: '1rem', lineHeight: 1.5 }}>
-                {project.description}
-              </p>
-
-              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: '#94A3B8', marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#0F172A', borderRadius: '0.25rem', border: '1px solid #334155' }}>
-                <div style={{ margin: 0, whiteSpace: 'pre', color: '#64748B' }}>
-{project.title}
-{project.techStack.map(t => ` → ${t}`).join('\n')}
+                return (
+                  <>
+              <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-2xl font-semibold text-slate-100">{project.title}</h3>
+                  <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-400">{project.period}</p>
                 </div>
+                <span className="rounded-md border border-slate-700 bg-slate-900 px-3 py-1 text-xs font-medium text-slate-400">
+                  {project.status === 'completed' ? 'Completed' : project.status === 'in-progress' ? 'In progress' : 'Prototype'}
+                </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '2rem' }} className="md:grid-cols-2">
+              <div className="grid gap-12 md:grid-cols-2">
                 <div>
-                  <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#38BDF8', marginBottom: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                    Arquitectura
-                  </h4>
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {project.technicalDetails.keyFeatures.slice(0, 8).map((feature) => (
-                      <li key={feature} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.5 }}>
-                        <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>▹</span>
-                        <span>{feature}</span>
-                      </li>
+                  <h4 className="panel-subtitle">Problem statement</h4>
+                  <p className="text-sm leading-relaxed text-slate-400">{notes.problem}</p>
+                </div>
+
+                <div>
+                  <h4 className="panel-subtitle">Technical architecture diagram</h4>
+                  <pre className="mono-block text-xs p-3">
+{notes.diagram}
+                  </pre>
+                </div>
+
+                <div>
+                  <h4 className="panel-subtitle">Technologies used</h4>
+                  <ul className="panel-list">
+                    {project.techStack.map((tech) => (
+                      <li key={tech}>{tech}</li>
                     ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#38BDF8', marginBottom: '1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                    Criterio Técnico
-                  </h4>
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {project.technicalDetails.demonstrates.map((demo) => (
-                      <li key={demo} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.5 }}>
-                        <span style={{ color: '#38BDF8', fontWeight: 600, minWidth: '1rem' }}>✓</span>
-                        <span>{demo}</span>
-                      </li>
+                  <h4 className="panel-subtitle">Key technical decisions</h4>
+                  <ul className="panel-list">
+                    {notes.decisions.map((decision) => (
+                      <li key={decision}>{decision}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="md:col-span-2">
+                  <h4 className="panel-subtitle">Engineering challenges solved</h4>
+                  <ul className="panel-list">
+                    {notes.challengesSolved.map((challenge) => (
+                      <li key={challenge}>{challenge}</li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1rem', borderTop: '1px solid #334155' }}>
-                <span style={{ color: '#64748B', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <FaClock />
-                  {project.period}
-                </span>
-                <span style={{
-                  padding: '0.25rem 0.75rem',
-                  backgroundColor: project.status === 'completed' ? '#38BDF8' : '#1E293B',
-                  color: project.status === 'completed' ? 'white' : '#94A3B8',
-                  borderRadius: '0.25rem',
-                  border: project.status === 'completed' ? 'none' : '1px solid #334155',
-                  fontSize: '0.8125rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.025em'
-                }}>
-                  {project.status === 'completed' ? 'COMPLETADO' : project.status === 'in-progress' ? 'EN PROGRESO' : 'PROTOTIPO'}
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', paddingTop: '1rem', borderTop: '1px solid #334155' }}>
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-700 pt-5">
+                <span className="text-sm text-slate-400">Backend and system design focus</span>
                 {project.links.github && (
-                  <a href={project.links.github} target="_blank" rel="noopener noreferrer" style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.75rem 1.5rem',
-                    backgroundColor: '#38BDF8',
-                    color: 'white',
-                    borderRadius: '0.5rem',
-                    textDecoration: 'none',
-                    fontWeight: 600,
-                    fontSize: '0.875rem',
-                    letterSpacing: '0.025em'
-                  }}>
-                    <FaGithub />
-                    GitHub
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-secondary !px-4 !py-2"
+                    aria-label={`Open ${project.title} repository`}
+                  >
+                    <FaGithub size={14} />
+                    Repository
                   </a>
                 )}
               </div>
-            </div>
+                  </>
+                );
+              })()}
+            </article>
           ))}
         </div>
       </div>
@@ -611,100 +700,44 @@ function Projects() {
 
 function Contact() {
   return (
-    <section id="contact" style={{ padding: '5rem 0', backgroundColor: '#0F172A' }}>
-      <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 1rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', color: '#38BDF8', letterSpacing: '0.025em' }}>
-            Contacto
-          </h2>
-          <p style={{ color: '#64748B', fontSize: '1rem', maxWidth: '384px', margin: '0 auto' }}>
-            Disponible para oportunidades como Backend Engineer o Mobile Developer Senior
+    <section id="contact" className="section section-dark border-t border-slate-800" aria-labelledby="contact-title">
+      <div className="container-shell pb-24 pt-16">
+        <div className="section-heading">
+          <h2 id="contact-title" className="section-title">Contacto</h2>
+          <p className="section-description">
+            Disponible para colaboraciones en backend, mobile y proyectos con IoT.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '2rem' }} className="lg:grid-cols-2">
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '2rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#E2E8F0', marginBottom: '1.5rem' }}>
-              Información de Contacto
-            </h3>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div>
-                <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#94A3B8', textDecoration: 'none' }}>
-                  <FaGithub style={{ color: '#38BDF8', fontSize: '1.25rem' }} />
-                  <div style={{ marginLeft: '0.5rem' }}>
-                    <div style={{ fontWeight: 600, color: '#E2E8F0', fontSize: '0.875rem', marginBottom: '0.25rem' }}>GitHub</div>
-                    <div style={{ color: '#64748B', fontSize: '0.875rem' }}>Hu-Tao128</div>
-                  </div>
-                </a>
-              </div>
-
-              <div>
-                <a href={personalInfo.contact.email} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#94A3B8', textDecoration: 'none' }}>
-                  <FaEnvelope style={{ color: '#38BDF8', fontSize: '1.25rem' }} />
-                  <div style={{ marginLeft: '0.5rem' }}>
-                    <div style={{ fontWeight: 600, color: '#E2E8F0', fontSize: '0.875rem', marginBottom: '0.25rem' }}>Email</div>
-                    <div style={{ color: '#64748B', fontSize: '0.875rem' }}>angel.josue@utj.edu.mx</div>
-                  </div>
-                </a>
-              </div>
-
-              <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem' }}>
-                  Ubicación
-                </h4>
-                <p style={{ color: '#94A3B8', fontSize: '0.875rem', lineHeight: 1.5 }}>
-                  {personalInfo.location}
-                </p>
-              </div>
-
-              <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '0.75rem' }}>
-                  Disponibilidad
-                </h4>
-                <span style={{
-                  padding: '0.5rem 1rem',
-                  backgroundColor: '#38BDF8',
-                  color: 'white',
-                  borderRadius: '0.25rem',
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.025em',
-                  display: 'inline-block'
-                }}>
-                  Disponible para proyectos
-                </span>
-              </div>
+        <div className="contact-shell mx-auto max-w-3xl">
+          <article className="panel contact-panel">
+            <h3 className="panel-title">Mensaje</h3>
+            <div className="mt-5 grid gap-4 text-sm text-slate-400 sm:grid-cols-2">
+              <a
+                href={personalInfo.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link inline-flex items-center gap-2"
+                aria-label="Open GitHub profile"
+              >
+                <FaGithub size={14} />
+                Hu-Tao128
+              </a>
+              <a
+                href={personalInfo.contact.email}
+                className="text-link inline-flex items-center gap-2"
+                aria-label="Send email"
+              >
+                <FaEnvelope size={14} />
+                angel.josue@utj.edu.mx
+              </a>
+              <p>{personalInfo.location}</p>
+              <p className="sm:text-right">Backend and Mobile Collaboration</p>
             </div>
 
-            <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #334155' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#E2E8F0', marginBottom: '1rem' }}>
-                Sobre Mí
-              </h4>
-              <p style={{ color: '#94A3B8', fontSize: '0.8125rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
-                {personalInfo.about}
-              </p>
-            </div>
-          </div>
-
-          <div style={{
-            backgroundColor: '#1E293B',
-            borderRadius: '0.5rem',
-            padding: '2rem',
-            border: '1px solid #334155'
-          }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#E2E8F0', marginBottom: '1.5rem' }}>
-              Envíame un Mensaje
-            </h3>
-
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <form className="mt-8 space-y-4" aria-label="Contact form">
               <div>
-                <label htmlFor="name" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#E2E8F0', marginBottom: '0.5rem' }}>
+                <label htmlFor="name" className="mb-2 block text-sm font-medium text-slate-400">
                   Nombre
                 </label>
                 <input
@@ -712,22 +745,13 @@ function Contact() {
                   id="name"
                   name="name"
                   placeholder="Tu nombre"
+                  className="field-input"
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.875rem 1rem',
-                    backgroundColor: '#0F172A',
-                    border: '1px solid #334155',
-                    borderRadius: '0.5rem',
-                    color: '#E2E8F0',
-                    fontSize: '0.875rem',
-                    outline: 'none'
-                  }}
+                  autoComplete="name"
                 />
               </div>
-
               <div>
-                <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#E2E8F0', marginBottom: '0.5rem' }}>
+                <label htmlFor="email" className="mb-2 block text-sm font-medium text-slate-400">
                   Email
                 </label>
                 <input
@@ -735,83 +759,74 @@ function Contact() {
                   id="email"
                   name="email"
                   placeholder="tu@email.com"
+                  className="field-input"
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.875rem 1rem',
-                    backgroundColor: '#0F172A',
-                    border: '1px solid #334155',
-                    borderRadius: '0.5rem',
-                    color: '#E2E8F0',
-                    fontSize: '0.875rem',
-                    outline: 'none'
-                  }}
+                  autoComplete="email"
                 />
               </div>
-
               <div>
-                <label htmlFor="message" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#E2E8F0', marginBottom: '0.5rem' }}>
+                <label htmlFor="message" className="mb-2 block text-sm font-medium text-slate-400">
                   Mensaje
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={4}
-                  placeholder="Describe tu oportunidad o proyecto..."
+                  placeholder="Describe tu oportunidad o proyecto"
+                  className="field-input resize-none"
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.875rem 1rem',
-                    backgroundColor: '#0F172A',
-                    border: '1px solid #334155',
-                    borderRadius: '0.5rem',
-                    color: '#E2E8F0',
-                    fontSize: '0.875rem',
-                    outline: 'none',
-                    resize: 'none'
-                  }}
                 />
               </div>
-
               <button
                 type="submit"
-                style={{
-                  width: '100%',
-                  padding: '0.875rem 1.5rem',
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  borderRadius: '0.5rem',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: '#38BDF8',
-                  color: 'white',
-                  letterSpacing: '0.025em',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem'
-                }}
+                className="cta-primary w-full"
+                aria-label="Send contact message"
               >
-                <span>Enviar</span>
-                <FaPaperPlane />
+                Enviar mensaje
               </button>
             </form>
-          </div>
+          </article>
         </div>
       </div>
     </section>
   );
 }
 
+function Footer() {
+  return (
+    <footer className="border-t border-slate-800 bg-[#020617]">
+      <div className="container-shell grid gap-8 py-10 text-sm text-slate-400 md:grid-cols-3">
+        <div>
+          <p className="font-semibold text-slate-200">{personalInfo.name}</p>
+          <p className="mt-2">Backend and Mobile Developer</p>
+        </div>
+        <nav aria-label="Footer" className="space-y-2">
+          <a href="#technologies" className="text-link block">Technical Stack</a>
+          <a href="#architecture-approach" className="text-link block">Architecture Approach</a>
+          <a href="#projects" className="text-link block">Projects</a>
+        </nav>
+        <div className="space-y-2">
+          <a href={personalInfo.contact.github} className="text-link block" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={personalInfo.contact.email} className="text-link block">Email</a>
+          <p>{personalInfo.location}</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 function App() {
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0F172A', color: '#E2E8F0', fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif', margin: 0 }}>
+    <div className="min-h-screen bg-[#020617] text-slate-100">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
+        <Technologies />
         <Architecture />
-        <Practices />
         <Projects />
+        <Practices />
+        <Education />
         <Contact />
       </main>
       <Footer />

@@ -12,10 +12,10 @@ interface ButtonProps {
 }
 
 const variantStyles = {
-  primary: 'bg-gradient-to-r from-[#10b981] to-[#3b82f6] hover:from-[#059669] hover:to-[#2563eb] text-white shadow-lg',
-  secondary: 'bg-[#1e293b] hover:bg-[#334155] text-[#f1f5f9] border border-[#334155]',
+  primary: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg',
+  secondary: 'bg-[#0f172a] hover:bg-[#1e293b] text-[#f1f5f9] border border-[#334155]',
   ghost: 'bg-transparent hover:bg-[#1e293b] text-[#f1f5f9]',
-  outline: 'bg-transparent hover:bg-[#1e293b] text-[#10b981] border-2 border-[#10b981] hover:border-[#059669]',
+  outline: 'bg-transparent hover:bg-[#1e293b] text-[#2563eb] border-2 border-[#2563eb] hover:border-[#1d4ed8]',
 };
 
 const sizeStyles = {

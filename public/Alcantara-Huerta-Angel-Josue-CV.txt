@@ -1,0 +1,24 @@
+ALCANTARA HUERTA ANGEL JOSUE
+Backend & Mobile Developer
+
+Location: Tijuana, Baja California, Mexico
+GitHub: https://github.com/Hu-Tao128
+Email: angel.josue@utj.edu.mx
+
+PROFILE
+Backend and mobile developer focused on REST architecture, IoT integration, and headless commerce.
+
+CORE STACK
+- Node.js, Express, TypeScript
+- React Native, Expo
+- MongoDB, PostgreSQL, Firebase
+- MedusaJS, REST APIs
+
+HIGHLIGHTS
+- Built scalable backend services with clear API design and modular architecture.
+- Developed cross-platform mobile apps with cloud and hardware integrations.
+- Delivered e-commerce projects using headless commerce patterns.
+
+EDUCATION
+Engineering in Software Development and Management (in progress)
+Universidad Tecnologica de Tijuana

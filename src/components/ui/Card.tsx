@@ -19,7 +19,7 @@ export function Card({ children, className = '', hover = true, glass = true }: C
       className={`
         rounded-xl p-6
         ${glass ? 'glass-effect' : 'bg-[#0f172a] border border-[#334155]'}
-        ${hover ? 'hover:shadow-xl hover:shadow-[#10b981]/10' : ''}
+        ${hover ? 'hover:shadow-xl hover:shadow-[#2563eb]/10' : ''}
         ${className}
       `}
     >
