@@ -124,7 +124,7 @@ function Hero() {
         <div className="mx-auto max-w-2xl text-center">
           <p
             className="mb-3 font-mono text-xs font-medium uppercase tracking-widest"
-            style={{ color: 'var(--color-accent)' }}
+            style={{ color: 'var(--color-green)' }}
           >
             Backend &amp; Mobile Engineer
           </p>
@@ -133,7 +133,7 @@ function Hero() {
             className="mb-5 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
             style={{ color: 'var(--color-text-primary)' }}
           >
-            Building scalable systems with clean architecture
+            Building <span style={{ color: 'var(--color-accent)' }}>scalable systems</span> with <span style={{ color: 'var(--color-orange)' }}>clean architecture</span>
           </h1>
           <p
             className="mx-auto mb-8 max-w-lg text-sm leading-relaxed sm:text-base"
@@ -169,6 +169,8 @@ function Technologies() {
   const layers = [
     {
       title: 'Backend',
+      color: 'orange',
+      dotColor: 'var(--color-orange)',
       items: [
         { name: 'Spring Boot 3', note: 'Java backend framework for layered API services with production-grade configuration.' },
         { name: 'Java 17/21', note: 'LTS runtime for strongly typed domain services and enterprise codebases.' },
@@ -180,6 +182,8 @@ function Technologies() {
     },
     {
       title: 'Databases',
+      color: 'cyan',
+      dotColor: 'var(--color-cyan)',
       items: [
         { name: 'MongoDB', note: 'Document model for flexible data and optimized queries in Node.js apps.' },
         { name: 'PostgreSQL', note: 'Relational consistency, complex relations and advanced SQL queries.' },
@@ -189,6 +193,8 @@ function Technologies() {
     },
     {
       title: 'Mobile',
+      color: 'green',
+      dotColor: 'var(--color-green)',
       items: [
         { name: 'React Native', note: 'Cross-platform development with reusable component architecture.' },
         { name: 'Expo', note: 'Build tooling, OTA updates and consistent native API access.' },
@@ -197,6 +203,8 @@ function Technologies() {
     },
     {
       title: 'Testing & DevOps',
+      color: 'yellow',
+      dotColor: 'var(--color-yellow)',
       items: [
         { name: 'Bucket4j', note: 'Rate limiting to protect API throughput and enforce fair client usage.' },
         { name: 'Jest', note: 'Unit testing for business logic, services and API validations.' },
@@ -206,6 +214,8 @@ function Technologies() {
     },
     {
       title: 'Infrastructure',
+      color: 'rose',
+      dotColor: 'var(--color-rose)',
       items: [
         { name: 'Spring Security OAuth2', note: 'Resource server token validation for JWT-protected endpoints.' },
         { name: 'Supabase Auth', note: 'Delegated identity provider with backend-side token verification.' },
@@ -220,7 +230,7 @@ function Technologies() {
     <section id="technologies" className="section section-soft" aria-labelledby="technologies-title">
       <div className="container-shell">
         <div className="section-heading">
-          <span className="section-label">Capabilities</span>
+          <span className="section-label" style={{ color: 'var(--color-cyan)' }}>Capabilities</span>
           <h2 id="technologies-title" className="section-title">Technical Stack</h2>
           <p className="section-description">
             Technology capabilities organized by architecture layer with backend-first priorities.
@@ -229,17 +239,25 @@ function Technologies() {
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {layers.map((layer) => (
-            <article key={layer.title} className="panel">
-              <h3 className="panel-title">{layer.title}</h3>
+            <article key={layer.title} className={`panel panel--${layer.color}`}>
+              <h3 className="panel-title" style={{ color: layer.dotColor }}>
+                {layer.title}
+              </h3>
               <div className="divider" />
               <ul className="panel-list">
                 {layer.items.map((item) => (
-                  <li key={item.name} className="flex flex-col gap-0.5">
-                    <span className="text-xs font-medium" style={{ color: 'var(--color-text-primary)' }}>
-                      {item.name}
-                    </span>
-                    <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                      {item.note}
+                  <li key={item.name} className="flex items-start gap-2">
+                    <span
+                      className="mt-1.5 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                      style={{ background: layer.dotColor }}
+                    />
+                    <span className="flex flex-col gap-0.5">
+                      <span className="text-xs font-medium" style={{ color: 'var(--color-text-primary)' }}>
+                        {item.name}
+                      </span>
+                      <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                        {item.note}
+                      </span>
                     </span>
                   </li>
                 ))}
@@ -288,7 +306,7 @@ Error Path -> AppError -> Error Middleware -> Standard JSON`;
     <section id="architecture-approach" className="section section-dark" aria-labelledby="architecture-title">
       <div className="container-shell">
         <div className="section-heading">
-          <span className="section-label">Design Patterns</span>
+          <span className="section-label" style={{ color: 'var(--color-teal)' }}>Design Patterns</span>
           <h2 id="architecture-title" className="section-title">Architecture Approach</h2>
           <p className="section-description">
             Layered backend architecture patterns focused on separation of concerns, modular services and transport-independent domain logic.
@@ -297,8 +315,8 @@ Error Path -> AppError -> Error Middleware -> Standard JSON`;
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Core principles */}
-          <article className="panel">
-            <h3 className="panel-title">Core Principles</h3>
+          <article className="panel panel--cyan">
+            <h3 className="panel-title" style={{ color: 'var(--color-cyan)' }}>Core Principles</h3>
             <div className="divider" />
             <ul className="panel-list">
               {corePrinciples.map((principle) => (
@@ -317,8 +335,8 @@ Error Path -> AppError -> Error Middleware -> Standard JSON`;
           </article>
 
           {/* Polyglot validation */}
-          <article className="panel">
-            <h3 className="panel-title">FitBalance Backend -- Polyglot Validation</h3>
+          <article className="panel panel--orange">
+            <h3 className="panel-title" style={{ color: 'var(--color-orange)' }}>FitBalance Backend -- Polyglot Validation</h3>
             <div className="divider" />
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
@@ -351,8 +369,8 @@ Error Path -> AppError -> Error Middleware -> Standard JSON`;
           </article>
 
           {/* Layer diagram */}
-          <article className="panel lg:col-span-2">
-            <h3 className="panel-title">Layer Diagram</h3>
+          <article className="panel panel--teal lg:col-span-2">
+            <h3 className="panel-title" style={{ color: 'var(--color-teal)' }}>Layer Diagram</h3>
             <div className="divider" />
             <div className="grid gap-4 md:grid-cols-2">
               <pre className="mono-block text-xs">{layerDiagram}</pre>
@@ -369,8 +387,35 @@ Error Path -> AppError -> Error Middleware -> Standard JSON`;
    Projects
    ═══════════════════════════════════════════ */
 
+const techColorMap: Record<string, string> = {
+  'Spring Boot 3': 'orange', 'Java 17/21': 'orange', 'Java': 'orange', 'Spring Security (OAuth2)': 'orange',
+  'Node.js': 'green', 'Express': 'green', 'MedusaJS': 'green', 'PHP': 'green',
+  'PostgreSQL': 'cyan', 'PostgreSQL (Supabase)': 'cyan', 'MongoDB Atlas': 'cyan', 'MongoDB': 'cyan',
+  'MySQL': 'cyan', 'Redis': 'cyan', 'pgvector': 'cyan', 'Firebase': 'yellow',
+  'React Native': 'purple', 'Expo': 'purple', 'Flutter (Client)': 'purple', 'Flutter': 'purple',
+  'TypeScript': 'blue', 'JavaScript': 'yellow',
+  'Docker': 'blue', 'REST API': 'teal', 'Supabase Auth': 'green',
+  'WebSocket (STOMP)': 'teal', 'Bluetooth': 'purple',
+  'ESP32': 'rose', 'IoT': 'rose', 'Real-time Database': 'yellow',
+  'HTML5': 'orange', 'CSS3': 'blue', 'HTML5/CSS3': 'orange',
+};
+
+function getTechBadgeClass(tech: string) {
+  const color = techColorMap[tech];
+  return color ? `tech-badge tech-badge--${color}` : 'tech-badge';
+}
+
+const projectColorMap: Record<string, string> = {
+  'study-medical': 'orange',
+  'medusa-ecommerce': 'green',
+  'fitbalance': 'purple',
+  'safecar': 'rose',
+  'yg-amigurumis': 'yellow',
+};
+
 function ProjectCard({ project }: { project: (typeof projects)[number] }) {
   const [expanded, setExpanded] = useState(false);
+  const panelColor = projectColorMap[project.id] || 'blue';
 
   const projectDesignNotes: Record<
     string,
@@ -501,7 +546,7 @@ PHP Controllers -> Service Layer
   };
 
   return (
-    <article className="panel h-full">
+    <article className={`panel panel--${panelColor} h-full`}>
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex-1">
@@ -514,7 +559,11 @@ PHP Controllers -> Service Layer
         </div>
         <span
           className={`status-badge ${
-            project.status === 'in-progress' ? 'status-badge--active' : 'status-badge--completed'
+            project.status === 'in-progress'
+              ? 'status-badge--active'
+              : project.status === 'completed'
+              ? 'status-badge--completed'
+              : 'status-badge--prototype'
           }`}
         >
           {project.status === 'completed' ? 'Completed' : project.status === 'in-progress' ? 'In progress' : 'Prototype'}
@@ -536,7 +585,7 @@ PHP Controllers -> Service Layer
         <h4 className="panel-subtitle">Stack</h4>
         <div className="flex flex-wrap gap-1.5">
           {project.techStack.map((tech) => (
-            <span key={tech} className="tech-badge">{tech}</span>
+            <span key={tech} className={getTechBadgeClass(tech)}>{tech}</span>
           ))}
         </div>
       </div>
@@ -620,7 +669,7 @@ function Projects() {
     <section id="projects" className="section section-soft" aria-labelledby="projects-title">
       <div className="container-shell">
         <div className="section-heading">
-          <span className="section-label">Portfolio</span>
+          <span className="section-label" style={{ color: 'var(--color-orange)' }}>Portfolio</span>
           <h2 id="projects-title" className="section-title">Projects</h2>
           <p className="section-description">
             Complete implementations with focus on architecture, data and operations.
@@ -646,26 +695,38 @@ function Practices() {
     {
       title: 'Clean Code',
       description: 'Small focused modules, meaningful naming and explicit boundaries between transport, domain and persistence logic.',
+      color: 'green',
+      dotColor: 'var(--color-green)',
     },
     {
       title: 'SOLID Principles',
       description: 'Applied in service layer design with interface-driven contracts, low coupling and testable domain abstractions.',
+      color: 'cyan',
+      dotColor: 'var(--color-cyan)',
     },
     {
       title: 'REST API Design',
       description: 'Resource-oriented endpoints, predictable status codes, version-safe contracts and consistent response envelopes.',
+      color: 'orange',
+      dotColor: 'var(--color-orange)',
     },
     {
       title: 'Git Workflow',
       description: 'Feature branching, pull-request reviews, conventional commits and controlled merges to maintain release stability.',
+      color: 'purple',
+      dotColor: 'var(--color-purple)',
     },
     {
       title: 'Unit Testing (Jest)',
       description: 'Coverage for services, validation rules and critical business flows with deterministic test fixtures.',
+      color: 'yellow',
+      dotColor: 'var(--color-yellow)',
     },
     {
       title: 'CI/CD (GitHub Actions)',
       description: 'Automated lint, build and test pipelines on pull requests for fast feedback and reliable integration.',
+      color: 'rose',
+      dotColor: 'var(--color-rose)',
     },
   ];
 
@@ -673,7 +734,7 @@ function Practices() {
     <section id="practices" className="section section-dark" aria-labelledby="practices-title">
       <div className="container-shell">
         <div className="section-heading">
-          <span className="section-label">Standards</span>
+          <span className="section-label" style={{ color: 'var(--color-green)' }}>Standards</span>
           <h2 id="practices-title" className="section-title">Engineering Practices</h2>
           <p className="section-description">
             Development standards applied across backend and mobile delivery.
@@ -682,10 +743,16 @@ function Practices() {
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {practices.map((practice) => (
-            <article key={practice.title} className="panel">
-              <h3 className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>
-                {practice.title}
-              </h3>
+            <article key={practice.title} className={`panel panel--${practice.color}`}>
+              <div className="flex items-center gap-2">
+                <span
+                  className="inline-block h-2 w-2 rounded-full"
+                  style={{ background: practice.dotColor }}
+                />
+                <h3 className="text-sm font-semibold" style={{ color: practice.dotColor }}>
+                  {practice.title}
+                </h3>
+              </div>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                 {practice.description}
               </p>
@@ -706,7 +773,7 @@ function Education() {
     <section id="education" className="section section-soft" aria-labelledby="education-title">
       <div className="container-shell">
         <div className="section-heading">
-          <span className="section-label">Background</span>
+          <span className="section-label" style={{ color: 'var(--color-purple)' }}>Background</span>
           <h2 id="education-title" className="section-title">Education</h2>
           <p className="section-description">
             Academic background and applied software engineering training.
@@ -714,8 +781,8 @@ function Education() {
         </div>
 
         <div className="grid gap-6">
-          {education.map((item) => (
-            <article key={item.id} className="panel">
+          {education.map((item, index) => (
+            <article key={item.id} className={`panel panel--${['purple', 'cyan', 'yellow'][index] || 'blue'}`}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h3 className="panel-title">{item.degree}</h3>
@@ -741,15 +808,18 @@ function Education() {
               <div>
                 <h4 className="panel-subtitle">Key Outcomes</h4>
                 <ul className="panel-list">
-                  {item.achievements.slice(0, 3).map((achievement) => (
-                    <li key={achievement} className="flex items-start gap-2">
-                      <span
-                        className="mt-1.5 inline-block h-1 w-1 flex-shrink-0 rounded-full"
-                        style={{ background: 'var(--color-accent)' }}
-                      />
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
+                  {item.achievements.slice(0, 3).map((achievement) => {
+                    const dotColors = ['var(--color-purple)', 'var(--color-cyan)', 'var(--color-yellow)'];
+                    return (
+                      <li key={achievement} className="flex items-start gap-2">
+                        <span
+                          className="mt-1.5 inline-block h-1 w-1 flex-shrink-0 rounded-full"
+                          style={{ background: dotColors[index] || 'var(--color-accent)' }}
+                        />
+                        <span>{achievement}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </article>
@@ -769,7 +839,7 @@ function Contact() {
     <section id="contact" className="section section-dark" aria-labelledby="contact-title">
       <div className="container-shell">
         <div className="section-heading">
-          <span className="section-label">Get in Touch</span>
+          <span className="section-label" style={{ color: 'var(--color-rose)' }}>Get in Touch</span>
           <h2 id="contact-title" className="section-title">Contact</h2>
           <p className="section-description">
             Available for backend, mobile and IoT project collaborations.
