@@ -19,6 +19,14 @@ export interface Project {
   };
   period: string;
   status: 'completed' | 'in-progress' | 'prototype';
+  school?: {
+    name: string;
+    career: string;
+    semester: string;
+    competition?: string;
+    achievement?: string;
+  };
+  team?: string;
 }
 
 export interface TechnicalDetails {

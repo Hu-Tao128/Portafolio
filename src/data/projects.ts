@@ -3,19 +3,19 @@ import type { Project } from '../types';
 export const projects: Project[] = [
   {
     id: 'study-medical',
-    title: 'Study Medical — Architecture-Driven Backend (In Progress)',
-    description: 'Healthcare-domain backend system designed with layered architecture, hybrid data strategy, and long-term scalability in mind.',
+    title: 'Study Medical — Backend Arquitectura (En progreso)',
+    description: 'Backend para una plataforma de estudio médico con enfoque en arquitectura por capas, seguridad JWT y búsqueda semántica.',
     featured: true,
     techStack: [
       'Spring Boot 3',
-      'Java 17/21',
+      'Java 21',
       'Spring Security (OAuth2)',
       'PostgreSQL (Supabase)',
       'MongoDB Atlas',
       'pgvector',
       'WebSocket (STOMP)',
       'Docker',
-      'Flutter (Client)',
+      'Flutter',
       'Supabase Auth'
     ],
     category: 'backend',
@@ -24,12 +24,10 @@ export const projects: Project[] = [
     },
     technicalDetails: {
       architecture: [
-        'Layered backend structure (Controller → Service → Repository)',
-        'JWT validation via Spring Security OAuth2 Resource Server',
-        'Hybrid persistence strategy (Relational + NoSQL)',
-        'DTO mapping via MapStruct',
-        'Rate limiting with Bucket4j',
-        'WebSocket-based real-time communication'
+        'Arquitectura por capas (Controller -> Service -> Repository)',
+        'OAuth2 Resource Server para validación de JWT',
+        'Persistencia híbrida (PostgreSQL + MongoDB)',
+        'MapStruct para mapeo DTO'
       ],
       keyFeatures: [
         'Supabase Auth integration for secure authentication',
@@ -45,10 +43,9 @@ export const projects: Project[] = [
         'Integrating secure JWT validation without custom auth server'
       ],
       solutions: [
-        'Explicit separation of domain responsibilities per data store',
-        'Security delegation to Supabase with token validation server-side',
-        'Layer isolation between transport, business logic and persistence',
-        'Future-proofed architecture with Dockerized environment design'
+        'Separación explícita de responsabilidades por tipo de datos',
+        'Delegación de autenticación en Supabase y validación server-side',
+        'Aislamiento entre capa de transporte, negocio y persistencia'
       ],
       demonstrates: [
         'Hybrid backend architecture planning',
@@ -58,13 +55,13 @@ export const projects: Project[] = [
         'Infrastructure-level awareness beyond CRUD APIs'
       ],
     },
-    period: '2026 - In Progress',
+    period: '2026 - Actualidad',
     status: 'in-progress',
   },
   {
     id: 'medusa-ecommerce',
     title: 'Backend E-commerce (MedusaJS v2)',
-    description: 'Plataforma e-commerce headless con MedusaJS v2, implementando módulos personalizados, arquitectura modular y event-driven para gestión multi-vendedor.',
+    description: 'Backend e-commerce headless con MedusaJS v2 para catálogo, órdenes y flujos multi-vendedor con módulos personalizados.',
     featured: true,
     techStack: [
       'MedusaJS',
@@ -90,16 +87,11 @@ export const projects: Project[] = [
         'ORM con MikroORM para PostgreSQL'
       ],
       keyFeatures: [
-        'Módulo personalizado \'custom-products\' (cross-sell, upsell, related products)',
-        'Módulo personalizado \'seller\' (gestión multi-vendedor con estados: pending/approved/rejected)',
-        'Sistema de email transaccional con Nodemailer y templates HTML',
-        'Integración con Firebase Admin para notificaciones',
-        'Integración con Stripe para pagos',
-        'Almacenamiento de archivos en S3',
-        'API Routes: products, orders, customers, addresses, inventory, shipping, collections, sellers',
-        'Subscribers: payment-success, order-preparation, fulfillment-shipment-created, product-updated',
-        'Workflows para procesos de negocio (create-seller-product, link-seller-product)',
-        'Links entre entidades (seller-customer, seller-product, product-custom)'
+        'Módulos personalizados para productos relacionados y sellers',
+        'Flujo multi-vendedor con estados (pending/approved/rejected)',
+        'Integración con Stripe para pagos y S3 para archivos',
+        'Emails transaccionales con Nodemailer',
+        'Subscribers para eventos críticos de pago y fulfillment'
       ],
       challenges: [
         'Gestión de catálogo con productos personalizados',
@@ -108,10 +100,9 @@ export const projects: Project[] = [
         'Gestión de inventario y órdenes en tiempo real'
       ],
       solutions: [
-        'Módulos personalizados con MikroORM',
-        'Event sourcing con subscribers para trazabilidad',
-        'Service layer separado para lógica de negocio',
-        'Integración con Redis para caché y colas'
+        'Módulos propios con MikroORM y servicios desacoplados',
+        'Subscribers para trazabilidad de eventos de negocio',
+        'Redis para caché y tareas asíncronas'
       ],
       demonstrates: [
         'Comprensión de arquitectura modular MedusaJS v2',
@@ -122,13 +113,13 @@ export const projects: Project[] = [
         'Módulo admin personalizado con SDK'
       ]
     },
-    period: '2024 - Actualidad',
-    status: 'in-progress'
+    period: '2024 - 2025',
+    status: 'completed'
   },
   {
     id: 'fitbalance',
     title: 'FitBalance',
-    description: 'Aplicación móvil multiplataforma de seguimiento nutricional con integración IoT Bluetooth, búsqueda de alimentos por texto y código de barras, backend en la nube y modo oscuro nativo.',
+    description: 'App móvil de seguimiento nutricional con registro de comidas, escaneo de código de barras y sincronización con backend Node.js.',
     featured: true,
     techStack: [
       'React Native',
@@ -154,27 +145,21 @@ export const projects: Project[] = [
         'Arquitectura cliente-servidor con sincronización en tiempo real'
       ],
       keyFeatures: [
-        'Búsqueda de alimentos por texto mediante Nutritionix API',
-        'Escaneo de códigos de barras con cámara (expo-camera)',
-        'Conexión Bluetooth Low Energy con dispositivos IoT (react-native-ble-plx)',
-        'Modo oscuro con persistencia local (AsyncStorage) y detección automática del sistema',
-        'Gestión de datos en la nube con MongoDB',
-        'Sistema de autenticación con bcrypt y perfiles de usuario',
-        'Notificaciones locales programadas (expo-notifications)',
-        'Creación de comidas personalizadas almacenadas localmente',
-        'Estadísticas y gráficas diarias/semanales'
+        'Búsqueda de alimentos por texto y escaneo de barras',
+        'Registro de comidas con almacenamiento local y remoto',
+        'Conexión Bluetooth Low Energy para dispositivos externos',
+        'Modo oscuro y preferencias persistentes',
+        'Estadísticas semanales de consumo'
       ],
       challenges: [
-        'Integración con APIs externas de nutrición (Nutritionix, FatSecret)',
-        'Sincronización de datos entre app y dispositivos Bluetooth',
-        'Optimización de rendimiento en dispositivos móviles',
-        'Gestión de estados complejos con Context API'
+        'Integración de APIs externas de nutrición',
+        'Sincronización entre app, backend y dispositivos Bluetooth',
+        'Rendimiento en dispositivos de gama media'
       ],
       solutions: [
-        'State management con Context API + custom hooks',
-        'AsyncStorage para persistencia local de preferencias y comidas',
-        'Detección automática del tema del sistema con persistencia manual',
-        'Lazy loading de componentes y optimización de renders'
+        'Context API + custom hooks para estado global',
+        'AsyncStorage para persistencia de preferencias',
+        'Optimización de render y carga diferida de vistas'
       ],
       demonstrates: [
         'Desarrollo móvil multiplataforma completo',
@@ -239,49 +224,55 @@ export const projects: Project[] = [
   {
     id: 'yg-amigurumis',
     title: 'YG Amigurumis',
-    description: 'Sistema e-commerce completo desarrollado con PHP y MySQL, con arquitectura modular y gestión de pedidos en tiempo real.',
+    description: 'E-commerce escolar de amigurumis desarrollado en PHP y MySQL, presentado en concurso de emprendedores a nivel estatal.',
     featured: true,
-    techStack: ['PHP', 'MySQL', 'JavaScript', 'HTML5', 'CSS3', 'REST API'],
+    techStack: ['PHP', 'MySQL', 'JavaScript', 'HTML5', 'CSS3'],
     category: 'ecommerce',
     links: {
-      github: 'https://github.com/Hu-Tao128/YG_Amigurumis',
+      github: 'https://github.com/Hu-Tao128/YG_Amigurumis'
     },
     technicalDetails: {
       architecture: [
         'Monolito PHP tradicional',
-        'Arquitectura MVC',
         'Base de datos relacional con MySQL',
-        'REST API para comunicación frontend-backend',
+        'Sistema de sesiones PHP para autenticación',
+        'Gestión de archivos modular por funcionalidad'
       ],
       keyFeatures: [
-        'Diseño de arquitectura de base de datos modular multi-producto',
-        'Desarrollo completo de sistema e-commerce',
-        'Implementación de autenticación con sesiones PHP',
-        'Carrito de compras con gestión de inventario',
-        'Gestión de pedidos y notificaciones',
-        'Integración de sistema de pagos (Stripe)',
-        'Sistema de notificaciones automáticas por email',
+        'Registro e inicio de sesión de usuarios',
+        'Carrito de compras y flujo de checkout por pasos',
+        'Catálogo categorizado con buscador',
+        'Panel administrativo para gestión de productos',
+        'Módulo de personalización de pedidos'
       ],
       challenges: [
-        'Diseño de BD escalable para múltiples productos',
-        'Gestión de transacciones seguras',
-        'Optimización de consultas MySQL',
+        'Diseño de base de datos para múltiples tipos de producto',
+        'Gestión de imágenes y formularios dinámicos',
+        'Validación de datos durante el checkout'
       ],
       solutions: [
-        'Normalización de base de datos',
-        'Implementación de transacciones ACID',
-        'Indexación estratégica de tablas',
-        'Cache de consultas frecuentes',
+        'Modelo relacional normalizado con tablas vinculadas',
+        'Carga y organización de imágenes por producto',
+        'Validación backend para formularios y compras'
       ],
       demonstrates: [
-        'Desarrollo web full-stack clásico',
+        'Desarrollo web full-stack clásico con PHP',
         'Diseño de bases de datos relacionales',
-        'Manejo de flujos de e-commerce',
-        'Experiencia con PHP tradicional',
-        'Gestión de sistemas de pagos',
-      ],
+        'Manejo de sesiones y autenticación',
+        'Gestión de formularios y validación',
+        'Programación orientada a objetos con MySQLi',
+        'Diseño UI/UX para e-commerce'
+      ]
     },
-    period: 'Agosto 2022 - Diciembre 2022',
+    period: 'Enero 2023 - Febrero 2023',
     status: 'completed',
+    school: {
+      name: 'CETIs No. 58 \'Emiliano Zapata\'',
+      career: 'Técnico en Programación',
+      semester: '6to Semestre',
+      competition: 'Concurso de Emprendedores 2023',
+      achievement: 'Etapa Estatal Ensenada'
+    },
+    team: 'Bahía Group'
   },
 ];
