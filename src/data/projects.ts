@@ -1,63 +1,63 @@
 import type { Project } from '../types';
 
 export const projects: Project[] = [
-  {
-    id: 'study-medical',
-    title: 'Study Medical — Backend Arquitectura (En progreso)',
-    description: 'Backend para una plataforma de estudio médico con enfoque en arquitectura por capas, seguridad JWT y búsqueda semántica.',
-    featured: true,
-    techStack: [
-      'Spring Boot 3',
-      'Java 21',
-      'Spring Security (OAuth2)',
-      'PostgreSQL (Supabase)',
-      'MongoDB Atlas',
-      'pgvector',
-      'WebSocket (STOMP)',
-      'Docker',
-      'Flutter',
-      'Supabase Auth'
-    ],
-    category: 'backend',
-    links: {
-      github: 'https://github.com/Hu-Tao128',
-    },
-    technicalDetails: {
-      architecture: [
-        'Arquitectura por capas (Controller -> Service -> Repository)',
-        'OAuth2 Resource Server para validación de JWT',
-        'Persistencia híbrida (PostgreSQL + MongoDB)',
-        'MapStruct para mapeo DTO'
-      ],
-      keyFeatures: [
-        'Supabase Auth integration for secure authentication',
-        'PostgreSQL for structured domain entities',
-        'MongoDB Atlas for high-volume flexible data (chats, logs, flashcards)',
-        'Vector embeddings via pgvector for semantic search',
-        'RESTful API baseline with version-ready structure'
-      ],
-      challenges: [
-        'Designing hybrid persistence without tight coupling',
-        'Maintaining domain clarity across relational and document storage',
-        'Planning scalable service boundaries before feature expansion',
-        'Integrating secure JWT validation without custom auth server'
-      ],
-      solutions: [
-        'Separación explícita de responsabilidades por tipo de datos',
-        'Delegación de autenticación en Supabase y validación server-side',
-        'Aislamiento entre capa de transporte, negocio y persistencia'
-      ],
-      demonstrates: [
-        'Hybrid backend architecture planning',
-        'Security-aware backend design',
-        'Scalability-conscious system modeling',
-        'Healthcare-domain structured thinking',
-        'Infrastructure-level awareness beyond CRUD APIs'
-      ],
-    },
-    period: '2026 - Actualidad',
-    status: 'in-progress',
-  },
+  // {
+  //   id: 'study-medical',
+  //   title: 'Study Medical — Backend Arquitectura (En progreso)',
+  //   description: 'Backend para una plataforma de estudio médico con enfoque en arquitectura por capas, seguridad JWT y búsqueda semántica.',
+  //   featured: true,
+  //   techStack: [
+  //     'Spring Boot 3',
+  //     'Java 21',
+  //     'Spring Security (OAuth2)',
+  //     'PostgreSQL (Supabase)',
+  //     'MongoDB Atlas',
+  //     'pgvector',
+  //     'WebSocket (STOMP)',
+  //     'Docker',
+  //     'Flutter',
+  //     'Supabase Auth'
+  //   ],
+  //   category: 'backend',
+  //   links: {
+  //     github: 'https://github.com/Hu-Tao128',
+  //   },
+  //   technicalDetails: {
+  //     architecture: [
+  //       'Arquitectura por capas (Controller -> Service -> Repository)',
+  //       'OAuth2 Resource Server para validación de JWT',
+  //       'Persistencia híbrida (PostgreSQL + MongoDB)',
+  //       'MapStruct para mapeo DTO'
+  //     ],
+  //     keyFeatures: [
+  //       'Supabase Auth integration for secure authentication',
+  //       'PostgreSQL for structured domain entities',
+  //       'MongoDB Atlas for high-volume flexible data (chats, logs, flashcards)',
+  //       'Vector embeddings via pgvector for semantic search',
+  //       'RESTful API baseline with version-ready structure'
+  //     ],
+  //     challenges: [
+  //       'Designing hybrid persistence without tight coupling',
+  //       'Maintaining domain clarity across relational and document storage',
+  //       'Planning scalable service boundaries before feature expansion',
+  //       'Integrating secure JWT validation without custom auth server'
+  //     ],
+  //     solutions: [
+  //       'Separación explícita de responsabilidades por tipo de datos',
+  //       'Delegación de autenticación en Supabase y validación server-side',
+  //       'Aislamiento entre capa de transporte, negocio y persistencia'
+  //     ],
+  //     demonstrates: [
+  //       'Hybrid backend architecture planning',
+  //       'Security-aware backend design',
+  //       'Scalability-conscious system modeling',
+  //       'Healthcare-domain structured thinking',
+  //       'Infrastructure-level awareness beyond CRUD APIs'
+  //     ],
+  //   },
+  //   period: '2026 - Actualidad',
+  //   status: 'in-progress',
+  // },
   {
     id: 'medusa-ecommerce',
     title: 'Backend E-commerce (MedusaJS v2)',
@@ -125,8 +125,6 @@ export const projects: Project[] = [
       'React Native',
       'Expo Go',
       'TypeScript',
-      'Node.js',
-      'Express',
       'MongoDB',
       'Mongoose',
       'Bluetooth Low Energy',

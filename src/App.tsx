@@ -79,7 +79,7 @@ function SectionWrapper({
 
 function Card({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-surface-card border border-border rounded-2xl p-8 transition-all duration-200 hover:-translate-y-1 hover:border-accent/40">
+    <div className="bg-surface-card w-full overflow-hidden border border-border rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 sm:p-8">
       {children}
     </div>
   );
@@ -289,7 +289,7 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
 
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Architecture</p>
-            <pre className="mt-2 overflow-x-auto rounded-lg border border-border bg-surface-primary p-6 text-xs leading-relaxed text-slate-400">
+            <pre className="mt-2 w-full overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-border bg-surface-primary p-4 text-xs leading-relaxed text-slate-400">
               {architecture.join('\n')}
             </pre>
           </div>
