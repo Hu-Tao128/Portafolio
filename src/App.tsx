@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { FaArrowRight, FaEnvelope, FaFileDownload, FaGithub } from 'react-icons/fa';
+import { useState, type ReactNode } from 'react';
+import { FaArrowRight, FaBars, FaEnvelope, FaFileDownload, FaGithub, FaTimes } from 'react-icons/fa';
 import { education, personalInfo, projects } from './data';
 
 const navLinks = [
@@ -96,8 +96,10 @@ function SectionHeading({ label, title, description }: { label: string; title: s
 }
 
 function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border bg-surface-primary/80 backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-full border-b border-border bg-surface-primary/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="#hero" className="font-mono text-sm tracking-wide text-accent">
           {'<BackendMobile />'}
@@ -109,7 +111,29 @@ function Header() {
             </a>
           ))}
         </nav>
+        <button
+          className="text-slate-300 transition-colors hover:text-accent md:hidden"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+        </button>
       </div>
+
+      {isMobileMenuOpen && (
+        <nav className="flex flex-col gap-4 border-t border-border bg-surface-primary px-6 py-4 text-sm text-slate-400 md:hidden" aria-label="Mobile">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="transition-colors hover:text-slate-100"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
@@ -407,9 +431,9 @@ function Contact() {
               </p>
             </div>
             <div className="grid gap-3">
-              <a href={personalInfo.contact.email} className={actionBtn} aria-label="Send an email">
+              <a href={`mailto:${personalInfo.contact.email}`} className={actionBtn} aria-label="Send an email">
                 <FaEnvelope size={12} />
-                alcantarahuerta128@gmail.com
+                {personalInfo.contact.email}
               </a>
               <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer" className={actionBtn}>
                 <FaGithub size={12} />
