@@ -394,7 +394,7 @@ function Contact() {
             <div className="grid gap-3">
               <a href={personalInfo.contact.email} className={actionBtn} aria-label="Send an email">
                 <FaEnvelope size={12} />
-                angel.josue@utj.edu.mx
+                alcantarahuerta128@gmail.com
               </a>
               <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer" className={actionBtn}>
                 <FaGithub size={12} />

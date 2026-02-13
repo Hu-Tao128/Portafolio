@@ -63,96 +63,131 @@ export const projects: Project[] = [
   },
   {
     id: 'medusa-ecommerce',
-    title: 'Backend E-commerce (MedusaJS)',
-    description: 'Configuración completa de plataforma e-commerce headless con MedusaJS, implementando arquitectura modular y escalable.',
+    title: 'Backend E-commerce (MedusaJS v2)',
+    description: 'Plataforma e-commerce headless con MedusaJS v2, implementando módulos personalizados, arquitectura modular y event-driven para gestión multi-vendedor.',
     featured: true,
-    techStack: ['MedusaJS', 'Node.js', 'PostgreSQL', 'Redis', 'Docker', 'REST API'],
+    techStack: [
+      'MedusaJS',
+      'Node.js',
+      'PostgreSQL',
+      'MikroORM',
+      'Stripe',
+      'S3',
+      'Firebase',
+      'TypeScript',
+      'Nodemailer'
+    ],
     category: 'backend',
     links: {
-      github: 'https://github.com/Hu-Tao128',
+      github: 'https://github.com/Hu-Tao128/medusa-store',
     },
     technicalDetails: {
       architecture: [
-        'Arquitectura de microservicios',
-        'API Gateway con Express',
-        'Event-driven architecture',
-        'Containerized services con Docker',
+        'Arquitectura modular con módulos personalizados',
+        'Event-driven architecture con subscribers',
+        'API Routes personalizadas con MedusaJS v2',
+        'Containerized con Docker',
+        'ORM con MikroORM para PostgreSQL'
       ],
       keyFeatures: [
-        'Modelado de productos, variantes y colecciones',
-        'Configuración de servicios, middlewares y plugins personalizados',
-        'Implementación de autenticación JWT y gestión de órdenes',
-        'Integración con frontend desacoplado (React/Next.js)',
-        'Sistema de caché con Redis',
+        'Módulo personalizado \'custom-products\' (cross-sell, upsell, related products)',
+        'Módulo personalizado \'seller\' (gestión multi-vendedor con estados: pending/approved/rejected)',
+        'Sistema de email transaccional con Nodemailer y templates HTML',
+        'Integración con Firebase Admin para notificaciones',
+        'Integración con Stripe para pagos',
+        'Almacenamiento de archivos en S3',
+        'API Routes: products, orders, customers, addresses, inventory, shipping, collections, sellers',
+        'Subscribers: payment-success, order-preparation, fulfillment-shipment-created, product-updated',
+        'Workflows para procesos de negocio (create-seller-product, link-seller-product)',
+        'Links entre entidades (seller-customer, seller-product, product-custom)'
       ],
       challenges: [
-        'Escalabilidad de catálogo con miles de productos',
-        'Gestión de inventario en tiempo real',
-        'Integración con múltiples servicios de pago',
+        'Gestión de catálogo con productos personalizados',
+        'Sistema multi-vendedor con validación de estados',
+        'Email transaccional escalable',
+        'Gestión de inventario y órdenes en tiempo real'
       ],
       solutions: [
-        'Redis caching para consultas frecuentes',
-        'Event sourcing para trazabilidad de órdenes',
-        'Queue system para procesamiento asíncrono',
-        'Plugin system para pagos y envíos',
+        'Módulos personalizados con MikroORM',
+        'Event sourcing con subscribers para trazabilidad',
+        'Service layer separado para lógica de negocio',
+        'Integración con Redis para caché y colas'
       ],
       demonstrates: [
-        'Comprensión de arquitectura modular',
+        'Comprensión de arquitectura modular MedusaJS v2',
         'Manejo de APIs REST estructuradas',
-        'Entendimiento de e-commerce escalable',
-        'Experiencia con headless commerce',
-        'Patrones de diseño avanzados',
-      ],
+        'Patrones de diseño con MikroORM',
+        'Event-driven architecture con subscribers',
+        'Integración con servicios externos (Stripe, S3, Firebase)',
+        'Módulo admin personalizado con SDK'
+      ]
     },
     period: '2024 - Actualidad',
-    status: 'completed',
+    status: 'in-progress'
   },
   {
     id: 'fitbalance',
     title: 'FitBalance',
-    description: 'Aplicación móvil multiplataforma de fitness con integración IoT, backend en la nube y modo oscuro nativo.',
+    description: 'Aplicación móvil multiplataforma de seguimiento nutricional con integración IoT Bluetooth, búsqueda de alimentos por texto y código de barras, backend en la nube y modo oscuro nativo.',
     featured: true,
-    techStack: ['React Native', 'Expo', 'Node.js', 'MongoDB Atlas', 'TypeScript', 'Bluetooth'],
+    techStack: [
+      'React Native',
+      'Expo Go',
+      'TypeScript',
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'Mongoose',
+      'Bluetooth Low Energy',
+      'AsyncStorage',
+      'Axios'
+    ],
     category: 'mobile',
     links: {
-      github: 'https://github.com/Hu-Tao128',
+      github: 'https://github.com/Hu-Tao128/FitBalance'
     },
     technicalDetails: {
       architecture: [
         'Cross-platform con React Native + Expo',
         'Backend RESTful con Node.js + Express',
-        'Base de datos NoSQL con MongoDB Atlas',
-        'Arquitectura cliente-servidor',
+        'Base de datos NoSQL con MongoDB + Mongoose',
+        'Arquitectura cliente-servidor con sincronización en tiempo real'
       ],
       keyFeatures: [
-        'Implementación de backend con Node.js y MongoDB Atlas',
-        'Integración de escáner de códigos QR',
-        'Conexión Bluetooth con báscula inteligente',
-        'Implementación de modo oscuro con persistencia local',
-        'Gestión de datos en la nube con optimización de consultas',
-        'Sistema de autenticación y perfiles de usuario',
+        'Búsqueda de alimentos por texto mediante Nutritionix API',
+        'Escaneo de códigos de barras con cámara (expo-camera)',
+        'Conexión Bluetooth Low Energy con dispositivos IoT (react-native-ble-plx)',
+        'Modo oscuro con persistencia local (AsyncStorage) y detección automática del sistema',
+        'Gestión de datos en la nube con MongoDB',
+        'Sistema de autenticación con bcrypt y perfiles de usuario',
+        'Notificaciones locales programadas (expo-notifications)',
+        'Creación de comidas personalizadas almacenadas localmente',
+        'Estadísticas y gráficas diarias/semanales'
       ],
       challenges: [
-        'Sincronización de datos en tiempo real',
-        'Optimización de performance en dispositivos móviles',
-        'Gestión de estados complejos en múltiples pantallas',
+        'Integración con APIs externas de nutrición (Nutritionix, FatSecret)',
+        'Sincronización de datos entre app y dispositivos Bluetooth',
+        'Optimización de rendimiento en dispositivos móviles',
+        'Gestión de estados complejos con Context API'
       ],
       solutions: [
-        'Implementación de React Query para data fetching',
-        'Optimización de imágenes con cache local',
         'State management con Context API + custom hooks',
-        'Lazy loading de componentes pesados',
+        'AsyncStorage para persistencia local de preferencias y comidas',
+        'Detección automática del tema del sistema con persistencia manual',
+        'Lazy loading de componentes y optimización de renders'
       ],
       demonstrates: [
         'Desarrollo móvil multiplataforma completo',
-        'Integración hardware-software (Bluetooth)',
-        'Gestión de datos en tiempo real',
-        'UI/UX con modo oscuro nativo',
-        'Arquitectura cross-platform',
-      ],
+        'Integración hardware-software (Bluetooth LE)',
+        'Consumo de APIs externas de nutrición',
+        'UI/UX con modo oscuro nativo y tema personalizado',
+        'Backend RESTful con Express y MongoDB',
+        'Gestión de notificaciones locales',
+        'Gráficos y estadísticas en tiempo real'
+      ]
     },
     period: 'Mayo 2025 - Agosto 2025',
-    status: 'completed',
+    status: 'completed'
   },
   {
     id: 'safecar',
@@ -162,7 +197,7 @@ export const projects: Project[] = [
     techStack: ['React Native', 'Firebase', 'ESP32', 'JavaScript', 'IoT', 'Real-time Database'],
     category: 'iot',
     links: {
-      github: 'https://github.com/Hu-Tao128',
+      github: 'https://github.com/oscarsgg/SafeCar',
     },
     technicalDetails: {
       architecture: [
@@ -209,7 +244,7 @@ export const projects: Project[] = [
     techStack: ['PHP', 'MySQL', 'JavaScript', 'HTML5', 'CSS3', 'REST API'],
     category: 'ecommerce',
     links: {
-      github: 'https://github.com/Hu-Tao128',
+      github: 'https://github.com/Hu-Tao128/YG_Amigurumis',
     },
     technicalDetails: {
       architecture: [
