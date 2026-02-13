@@ -292,6 +292,21 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
               ))}
             </ul>
           </div>
+
+          {project.links?.github && (
+            <div className="pt-2">
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-accent transition-colors hover:text-accent/80"
+              >
+                <FaGithub size={14} />
+                View Repository
+                <FaArrowRight size={10} />
+              </a>
+            </div>
+          )}
         </div>
       </Card>
     </article>
