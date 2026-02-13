@@ -7,7 +7,7 @@ export const personalInfo: PersonalInfo = {
   description: 'Desarrollador full-stack con experiencia en aplicaciones móviles multiplataforma, backend escalable e integración IoT. Apasionado por crear soluciones tecnológicas innovadoras.',
   contact: {
     github: 'https://github.com/Hu-Tao128',
-    email: 'mailto:angel.josue@utj.edu.mx',
+    email: 'alcantarahuerta128@gmail.com',
   },
   about: `Soy un desarrollador full-stack con enfoque en aplicaciones móviles y backend, con experiencia sólida en React Native, Node.js, y tecnologías IoT. Mi perfil técnico incluye:
 

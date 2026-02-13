@@ -8,7 +8,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
-          'framer-motion': ['framer-motion'],
           'icons': ['react-icons'],
         },
       },
@@ -16,6 +15,6 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    include: ['framer-motion', 'react-icons'],
+    include: ['react-icons'],
   },
 })
