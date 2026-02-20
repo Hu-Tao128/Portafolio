@@ -13,6 +13,11 @@ export interface Project {
   technicalDetails: {
     architecture: string[];
     keyFeatures: string[];
+    migrationStatus?: {
+      summary: string;
+      alreadyMigrated: string[];
+      pendingOrPartial: string[];
+    }
     challenges: string[];
     solutions: string[];
     demonstrates: string[];

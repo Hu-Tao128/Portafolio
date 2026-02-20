@@ -237,6 +237,79 @@ export const projects: Project[] = [
     status: 'completed'
   },
   {
+    id: 'fitbalance-spring-backend',
+    title: 'Backend de Nutricion (FitBalance) - Migracion a Spring Boot',
+    description: 'API backend para una app de nutricion enfocada en pacientes y nutriologos, migrada desde un backend monolitico en Node.js/Express (index.ts) hacia Java Spring Boot con MongoDB.',
+    featured: true,
+    techStack: [
+      'Java 11',
+      'Spring Boot 2.7.18',
+      'Spring Web',
+      'Spring Data MongoDB',
+      'Spring Security',
+      'Spring Validation',
+      'MongoDB Atlas',
+      'RestTemplate',
+      'BCryptPasswordEncoder',
+      'java-dotenv',
+      'Maven Wrapper'
+    ],
+    category: 'backend',
+    links: {
+      github: 'https://github.com/Hu-Tao128/Fitbalance-Spring'
+    },
+    technicalDetails: {
+      architecture: [
+        'Separación de responsabilidades usando capas de Controlador, Servicio y Repositorio en Spring Boot.',
+        'Separar la lógica de negocio del manejo de solicitudes HTTP.',
+        'Uso de DTOs para desacoplar los contratos de la API de los modelos de persistencia.',
+        'Abstracción de repositorio para el acceso a bases de datos.'
+      ],
+      keyFeatures: [
+        'Login de pacientes y consulta de perfil.',
+        'Actualizacion de perfil y cambio de contrasena con BCrypt.',
+        'Consulta de alimentos locales y busqueda externa en Nutritionix.',
+        'Consulta de plan semanal (ultimo plan) y plan diario.',
+        'Consulta de bitacoras diarias: hoy, por fecha, historico y borrado de comidas.'
+      ],
+      migrationStatus: {
+        summary: 'La migracion principal Node.js -> Spring Boot si se logro para los endpoints core y el modelo principal; aun hay funcionalidades pendientes de paridad total.',
+        alreadyMigrated: [
+          'Auth basico (login, user, update patient, change-password).',
+          'Food (listado y search-food con Nutritionix).',
+          'Weekly plan (latest y daily).',
+          'Daily meal logs (today, by-date, all, daily-nutrition, delete meal).'
+        ],
+        pendingOrPartial: [
+          'Recuperacion de contrasena por correo: en Node esta con `nodemailer` (`/send-reset-code`), en Spring aun no hay endpoint equivalente implementado.',
+          'Nodemailer no se puede usar directamente en Java porque es libreria de Node.js; la alternativa en Spring es `JavaMailSender`.',
+          'Algunas rutas en Spring tienen logica placeholder/incompleta (ej. recalculo simplificado en `calculateDailyTotals`, alta completa en ciertos flujos).',
+          'No se observa paridad completa de rutas como PatientMeals, appointments y nutritionist en controladores Spring actuales.'
+        ]
+      },
+      challenges: [
+        'Mantener compatibilidad con el esquema MongoDB existente durante la migracion.',
+        'Conservar el manejo correcto de fechas diarias por zona horaria de Tijuana.',
+        'Traducir logica de negocio de un `index.ts` grande a capas mas ordenadas en Spring.',
+        'Resolver equivalencias de librerias Node-only (ej. Nodemailer) en ecosistema Java.'
+      ],
+      solutions: [
+        'Mapeo de documentos Mongo con anotaciones Spring Data (`@Document`, `@Field`, `@DBRef`).',
+        'Uso de utilidades de fecha en Java Time (`DateTimeUtils`) para inicio/fin del dia en Tijuana.',
+        'BCrypt de Spring Security para reemplazar `bcryptjs`.',
+        'Definicion de alternativa para correo transaccional con `JavaMailSender` en lugar de Nodemailer.'
+      ],
+      demonstrates: [
+        'Migracion de backend de Node.js/TypeScript a Java/Spring Boot.',
+        'Diseño de API REST y continuidad de contrato sobre MongoDB.',
+        'Integracion con APIs externas en Spring.',
+        'Adaptacion de dependencias entre ecosistemas (Node vs Java).'
+      ]
+    },
+    period: '2025 - 2026',
+    status: 'in-progress'
+  },
+  {
     id: 'safecar',
     title: 'SafeCar',
     description: 'Sistema de rastreo vehicular en tiempo real con integración IoT, sincronización bidireccional y gestión de pólizas digitales.',
