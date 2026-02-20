@@ -113,7 +113,7 @@ export const projects: Project[] = [
         'Módulo admin personalizado con SDK'
       ]
     },
-    period: '2024 - 2025',
+    period: 'Septiembre 2025 - Diciembre 2025',
     status: 'completed'
   },
   {
@@ -167,6 +167,70 @@ export const projects: Project[] = [
         'Backend RESTful con Express y MongoDB',
         'Gestión de notificaciones locales',
         'Gráficos y estadísticas en tiempo real'
+      ]
+    },
+    period: 'Mayo 2025 - Agosto 2025',
+    status: 'completed'
+  },
+  {
+    id: 'fitbalance-backend',
+    title: 'Backend de Nutrición (FitBalance)',
+    description: 'API backend para una app de nutrición enfocada en pacientes y nutriólogos, con planes semanales, registro diario de comidas, alimentos personalizados, citas y recuperación de contraseña por correo.',
+    featured: true,
+    techStack: [
+      'Node.js',
+      'Express',
+      'TypeScript',
+      'MongoDB Atlas',
+      'Mongoose',
+      'Axios',
+      'Nutritionix API',
+      'FatSecret OAuth',
+      'Nodemailer',
+      'Luxon',
+      'bcryptjs',
+      'Docker',
+      'Fly.io'
+    ],
+    category: 'backend',
+    links: {
+      github: 'https://github.com/Hu-Tao128/fitbalance-backend'
+    },
+    technicalDetails: {
+      architecture: [
+        'Monolito backend en Express con un único entrypoint (`src/index.ts`)',
+        'Arquitectura orientada a recursos REST (auth, alimentos, planes, logs diarios, citas, nutriólogo)',
+        'Persistencia con modelos Mongoose sobre MongoDB',
+        'Integración de servicios externos vía HTTP (Nutritionix y FatSecret)',
+        'Despliegue containerizado con Docker y configuración para Fly.io'
+      ],
+      keyFeatures: [
+        'Login de pacientes y consulta de perfil',
+        'Recuperación de contraseña por token enviado por correo',
+        'Búsqueda de alimentos en Nutritionix y lectura de catálogo local',
+        'Gestión de plan semanal y consulta del plan diario',
+        'Registro diario de comidas con recálculo de calorías/macros',
+        'CRUD de comidas personalizadas por paciente',
+        'Consulta de citas y datos de nutriólogo'
+      ],
+      challenges: [
+        'Manejo correcto de fechas diarias por zona horaria específica (America/Tijuana)',
+        'Sincronización entre plan semanal y bitácora diaria',
+        'Consistencia de totales nutricionales al agregar/eliminar comidas',
+        'Convivencia de rutas con convenciones de naming distintas (kebab-case/PascalCase)'
+      ],
+      solutions: [
+        'Helpers de fecha centralizados con Luxon para inicio/fin del día en Tijuana',
+        'Función reusable para recálculo de totales diarios (`calculateDailyTotals`)',
+        'Modelado por colecciones separadas (Patient, WeeklyPlan, DailyMealLog, PatientMeal, Appointment, Nutritionist)',
+        'Upsert y normalización de alimentos al registrar comida desde búsqueda externa'
+      ],
+      demonstrates: [
+        'Diseño de API REST en Express con TypeScript',
+        'Modelado de dominio nutricional en MongoDB/Mongoose',
+        'Integración con APIs externas y manejo de credenciales por entorno',
+        'Flujos de negocio de salud nutricional (planificación y tracking diario)',
+        'Preparación para despliegue cloud con Docker/Fly.io'
       ]
     },
     period: 'Mayo 2025 - Agosto 2025',

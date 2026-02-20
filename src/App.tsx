@@ -13,9 +13,9 @@ const navLinks = [
 
 const stackLayers = [
   { title: 'Backend', tools: ['Spring Boot', 'Node.js', 'Express', 'Java', 'TypeScript'] },
-  { title: 'Databases', tools: ['PostgreSQL', 'MongoDB', 'pgvector', 'Firebase'] },
+  { title: 'Databases', tools: ['PostgreSQL', 'MongoDB', 'MYSQL', 'Firebase'] },
   { title: 'Mobile', tools: ['React Native', 'Expo', 'Bluetooth', 'IoT Integration'] },
-  { title: 'DevOps', tools: ['GitHub Actions', 'Jest', 'Testing Library', 'Rate Limiting'] },
+  { title: 'DevOps', tools: ['GitHub Actions', 'Testing Library', 'Rate Limiting'] },
   { title: 'Infrastructure', tools: ['Docker', 'OAuth2/JWT', 'Supabase Auth', 'Environment Isolation'] },
 ];
 
@@ -153,7 +153,7 @@ function Hero() {
             Building reliable product architecture from API contracts to mobile delivery.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-400">
-            I design layered systems with predictable data flow, maintainable backend services, and mobile clients that stay stable under real-world conditions.
+            Diseño sistemas estructurados con flujo de datos predecible, servicios backend mantenibles y clientes móviles que se mantienen estables en condiciones del mundo real.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a href="#projects" className={primaryBtn}>
@@ -401,6 +401,15 @@ function Education() {
               </div>
               <div className="my-4 h-px bg-border" />
               <p className="text-sm leading-relaxed text-slate-300">{item.description}</p>
+              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Key Outcomes</p>
+              <ul className="mt-2 flex flex-col gap-3 text-sm text-slate-300">
+                {item.achievements.map((achievement) => (
+                  <li key={achievement} className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
+                    <span>{achievement}</span>
+                  </li>
+                ))}
+              </ul>
             </Card>
           </article>
         ))}
